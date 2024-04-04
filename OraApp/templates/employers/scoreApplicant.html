@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+
+{% block container %}
+
+
+<section class="work-section">
+    <div class="auto-container">
+      <div class="sec-title text-center">
+        <h2>Score Applicant</h2>
+      </div>
+
+      <div class="row wow fadeInUp">
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+          <div class="inner-box">
+            <!-- <figure class="image"><img src="images/resource/work-1.png" alt=""></figure> -->
+            <h5>Applicant Details</h5>
+            <p class="text-muted">Applicant ID: <a href="{{url_for('main.candidates')}}">{{applicant.id }}</a></p>
+            <p class="text-muted">Applied for: {{ job.title }}</p>          
+        </div>
+        </div>
+
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+          <div class="inner-box">
+            <!-- <figure class="image"><img src="images/resource/work-2.png" alt=""></figure> -->
+            <h5>Education Score</h5>
+            <p class="text-muted">Primary Count: {{ education_score.primary_count }}</p>
+            <p class="text-muted">Secondary Count: {{ education_score.secondary_count }}</p>
+            <p class="text-muted">Higher Count: {{ education_score.higher_count }}</p>
+          </div>
+        </div>
+
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+          <div class="inner-box">
+            <!-- <figure class="image"><img src="images/resource/work-3.png" alt=""></figure> -->
+            <h5>Personality Score</h5>
+            <p class="text-muted">Confidence: {{ personality_score.person_score.confidence }}</p>
+            <p class="text-muted">Ethical: {{personality_score.person_score.ethical }}</p>
+            <p class="text-muted">Leadership: {{ personality_score.person_score.leadership }}</p>
+          </div>
+        </div>
+
+         <!-- Work Block -->
+         <div class="work-block col-lg-4 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <!-- <figure class="image"><img src="images/resource/work-3.png" alt=""></figure> -->
+              <h5>Job Similarity Score</h5>
+              <p>Similarity Percentage: {{ similarity_score }}</p>
+            </div>
+          </div>
+
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <!-- <figure class="image"><img src="images/resource/work-3.png" alt=""></figure> -->
+              <h5>Job Description</h5>
+              <p>{{ job_description }}</p>
+            </div>
+          </div>
+
+
+          <!-- Add this section to your HTML file -->
+          <div class="work-block col-lg-4 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <h5>Applicant's Answers</h5>
+              <ul>
+                {% for question, answer in applicant_questions_and_answers %}
+                <li><strong>{{ question }}:</strong> {{ answer }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+<br><br>
+<center>
+<h3>Invite Employers To Score</h3>
+</center>
+<br><br>
+  <div class="row">
+    {% for employer in employers %}
+    <div class="company-block-four col-xl-4 col-lg-6 col-md-6 col-sm-12">
+        <div class="inner-box">
+            {% for emp_detail in emp_details %}
+                {% if emp_detail.user_id == employer.id %}
+                    <span class="company-logo"><img src="{{ url_for('static', filename='employer/logo/' + emp_detail.logo) }}" alt=""></span>
+                {% endif %}
+            {% endfor %}
+          <h4><a href="#">{{ employer.id }}</a></h4>
+          <ul class="job-info">
+            <li><span class="icon las la-envelope"></span>{{ employer.email }}</li>
+            {% for emp_detail in emp_details %}
+                {% if emp_detail.user_id == employer.id %}
+                <li><span class="icon las la-phone-square"></span>  {{ emp_detail.phone }}</li>
+                {% endif %}
+                {% if emp_detail.user_id == employer.id %}
+                <li><span class="icon las la-map-marker"></span>  {{ emp_detail.location }}</li>
+                {% endif %}
+            {% endfor %}
+          </ul>
+          <div>
+            <a href="{{ url_for('employer.add_subemployer', employee_id=employer.id,applicant_id=applicant.id,job_id=job.id) }}"><button class="theme-btn btn-style-three">Invite to Score</button></a>
+          </div>
+          
+        </div>
+    </div>
+    {% endfor %}   
+  </div>
+
+
+  <!--UPDATED-->
+  <div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-3"></div>
+    <div class="company-block-four col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      {% if scores_dict %}
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Employer ID</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for employer_id, score in scores_dict.items() %}
+          <tr>
+            <td>{{ employer_id }}</td>
+            <td>{{ score }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="">No scores available</p>
+      {% endif %}
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3"></div>
+  </div>
+
+
+
+
+
+
+<!-- Add this section to your HTML file -->
+<!-- Add this section to your HTML file -->
+
+<section class="work-section">
+    <div class="auto-container">
+      <div class="sec-title text-center">
+        <h2>Submit Scores</h2>
+      </div>
+
+      <div class="row wow fadeInUp">
+        <!-- Work Block -->
+        <div class="col-lg-1"></div>
+        <div class="work-block col-lg-10 col-sm-12">
+          <div class="inner-box">
+            <!-- <figure class="image"><img src="images/resource/work-1.png" alt=""></figure> -->
+            <h5>Rank this Applicant</h5>
+            <div class="form-group">
+                <form action="{{ url_for('employer.submit_scores', applicant_id=applicant.id, job_id=job.id) }}" method="post">
+                    <label for="your_score">Your Score:</label>
+                    <input type="range" id="your_score" name="your_score" min="0" max="50" class="form-range"
+                        value="25">
+                    <output for="your_score" id="score_output"></output>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit Scores</button>
+                </form>
+            </div>
+            
+        </div>
+        <div class="col-lg-1"></div>
+        </div>
+
+     
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    var input = document.getElementById('your_score');
+
+    var output = document.getElementById('score_output');
+
+    input.addEventListener('input', function() {
+        output.textContent = input.value;
+    });
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}

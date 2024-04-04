@@ -1,0 +1,672 @@
+{% extends 'base.html' %}
+{% block container %}
+<br><br>
+  <!-- Banner Section-->
+  <section class="banner-section-three -type-12">
+    <div class="bg-image">
+      <img src="{{url_for('static', filename='img/index-12/header/bg.png')}}" alt="image">
+      <figure class="main-image wow fadeInRight" data-wow-delay="1500ms"><img src="{{url_for('static', filename='img/hero3.png')}}" alt=""></figure>
+    </div>
+      <div class="auto-container">
+        <div class="row">
+          <div class="content-column col-lg-7 col-md-12 col-sm-12">
+            <div class="inner-column wow fadeInUp" data-wow-delay="1000ms">
+              <div class="title-box">
+                <h3>#1 recruit-tech platform to <br>find women in STEM</h3>
+                <div class="text">Find STEM jobs in an inclusive and an equitable space</div>
+              </div>
+
+              <!-- Job Search Form -->
+              <div class="job-search-form-two wow fadeInUp" data-wow-delay="500ms">
+                <form method="post" action="{{ url_for('jobs.job_search') }}">
+                    {{ form1.hidden_tag() }}
+                  <div class="row">
+                    <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                      <span class="icon flaticon-search-1"></span>
+                      <label class="title">What</label>
+                      <input type="text" name="title" placeholder="Job title or company" required>
+                    </div>
+                    <!-- Form Group -->
+                    <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
+                        <span class="icon flaticon-map-locator"></span>
+                      <label class="title">Where</label>
+                      <input type="text" name="location" placeholder="Location">
+                    </div>
+                    <!-- Form Group -->
+                    <div class="form-group col-lg-4 col-md-12 col-sm-12 btn-box">
+                      <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Find Jobs</span></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- Job Search Form -->
+            
+
+            </div>
+          </div>
+
+         
+        </div>
+      </div>
+  </section>
+  <!-- End Banner Section-->
+
+  <!--Some STEM Companies We Engage With-->
+  <section class="work-section">
+    <div class="auto-container">
+      <div class="sec-title">
+        <h2><b>Some STEM Companies We Engage With:</b></h2>
+      </div>
+    </div>
+    <div class="row auto-container">
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo1.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo2.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo3.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-2">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo4.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-2">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo13.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo5.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo6.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row auto-container">
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo7.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo8.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo9.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo10.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo11.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="inner-box">
+          <figure class="image grayimg"><img src="{{url_for('static', filename='img/comlogo12.png')}}" alt="" style="width: 150px; height: auto; text-align: center; padding: 5%;"></figure>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  <!--end Some STEM Companies We Engage With-->
+
+
+  <!-- Job Categories -->
+  {% if jobs.page == 1 %}
+  <section class="job-categories layout-pt-60 layout-pb-60 border-bottom-none">
+      <div class="auto-container">
+        <div class="row justify-content-between align-items-end">
+          <div class="col-lg-6">
+            <div class="">
+              <h2 class="fw-700">Popular Job Categories</h2>
+            </div>
+          </div>
+  
+          <div class="col-auto md:mt-16">
+            <a href="{{ url_for('jobs.categories') }}" class="button-icon -arrow">
+              Browse All
+              <span class="fa fa-angle-right"></span>
+            </a>
+          </div>
+        </div>
+  
+        <div class="row mt-50 wow fadeInUp">
+  
+          <!-- Category Block -->
+          {% if categories %}
+          {% for category in categories[:4] %}
+          <div class="category-block-three -type-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <div class="content">
+                <span class="icon flaticon-promotion"></span>
+                <h4><a href="{{ url_for('jobs.filtered', category=category) }}">{{category}}</a></h4>
+                <p> {{ filtered.filter_by(category=category).all() | length}} open positions</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+              <p>No available Job Categories</p>
+          {% endif %}
+  
+        </div>
+      </div>
+    </section>
+  {% endif %}
+  
+  <!-- End Job Categories -->
+
+ 
+  <!--Search for Jobs-->
+  <section class="work-section">
+    <div class="auto-container">
+      <div class="row">
+        <!-- Image Column -->
+        
+
+        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+          <div class="inner-column wow fadeInRight">
+            <div class="sec-title">
+              <!-- <span class="sub-title">DOWNLOAD & ENJOY</span> -->
+              <h1><b>Search for Jobs</b></h1>
+              <div class="text">We don’t just recruit, we connect. Search for jobs from ethical employers that are committed to diversity and inclusion of ALL women in STEM including women of  colour/CALD. You can also attend our careers fair or employability workshops to improve the visibility and attractiveness of your resume to employers. Here are some reasons our women love us:
+                <br><br>
+                ✓ We believe diversity isn’t a nice-to-have, it’s a must-have!
+                <br><br>
+                ✓ We are women in STEM with lived experience of the problem we are tackling!
+                <br><br>
+                ✓ We are interested in STEM women growing to become leaders through our unique mentoring retention program.</div>
+            </div>
+            <a href="{{url_for('jobs.job_list')}}" class="theme-btn btn-style-three call-modal">Discover More</a>
+          </div>
+        </div>
+
+        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+          <div class="bg-shape"></div>
+          <figure class="image wow fadeInLeft"><img src="{{url_for('static', filename='img/tab1.jpg')}}" alt=""></figure>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+  <!--end Search for Jobs-->
+
+
+  <!--Build a suitable STEM resume-->
+  <section class="work-section">
+    <div class="auto-container">
+      <div class="row">
+        <!-- Image Column -->
+        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+          <div class="bg-shape"></div>
+          <figure class="image wow fadeInLeft"><img src="{{url_for('static', filename='img/tab2.jpg')}}" alt=""></figure>
+        </div>
+        
+
+        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+          <div class="inner-column wow fadeInRight">
+            <div class="sec-title">
+              <!-- <span class="sub-title">DOWNLOAD & ENJOY</span> -->
+              <h1><b>Build a suitable STEM resume</b></h1>
+              <div class="text">An efficient resume should promote your abilities and include tangible accomplishments that are relevant to the job you apply for. You should also prepare a concise cover letter that elaborates on how you can put your skills to use in the organisation. Here are some tips you should have in mind when building your resume:
+                <br><br>
+                ✓ Have a clear summary or profile that highlights your expertise or objective
+                <br>
+                ✓ Locate keywords from the position description and include them in your resume and cover letter
+                <br>
+                ✓ Use active voice to amplify your tasks when listing your job experience
+                <br>
+                ✓ List your education background including any certifications and licenses
+                <br>
+                ✓ If you lack relevant experience, include projects from your previous studies and convert to experience to amplify your strengths and capabilities
+                <br>
+                ✓ Include your relevant and transferable skills
+                <br>
+                ✓ Include achievements, awards and recognitions. Add metrics and statistics to emphasize results.
+                <br>
+                ✓ If you are a STEM returner after a career break, have a sentence that explains the gap. Don’t worry, at iSTEM Co., we work with only ethical employers that understand that sometimes in life, we just need a break.
+                <br>
+                Use our unique resume-building tool, to create a professional resume in 15 minutes:</div>
+            </div>
+            <a href="{{url_for('applicant.applicant_login')}}" class="theme-btn btn-style-three call-modal">Create Now!</a>
+          </div>
+        </div>
+
+        
+
+
+      </div>
+    </div>
+  </section>
+  <!--end Build a suitable STEM resume-->
+
+
+  <!--Perform during your interview-->
+  <section class="work-section">
+    <div class="auto-container">
+      <div class="row">
+        <!-- Image Column -->
+        
+
+        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+          <div class="inner-column wow fadeInRight">
+            <div class="sec-title">
+              <!-- <span class="sub-title">DOWNLOAD & ENJOY</span> -->
+              <h1><b>Perform during your interview</b></h1>
+              <div class="row">
+                <div class="category-block">
+                  <div class="">
+                    <br>
+                    <div class="content">
+                      <span class="icon"><i class="fa fa-laptop" aria-hidden="true"></i></span>
+                      <h4>Employability Workshop</h4>
+                      <p>Sign up for our unique employability workshop to create resumes that stand out</p>
+                    </div>
+                    <br>
+                    <div class="content">
+                      <span class="icon"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></span>
+                      <h4>Interview Tips</h4>
+                      <p>We also provide interview tips that improve your chances of securing that role</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+              
+            </div>
+              
+            </div>
+            <a href="" class="theme-btn btn-style-three call-modal">Discover More</a>
+          </div>
+        </div>
+
+        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+          <div class="bg-shape"></div>
+          <figure class="image wow fadeInLeft"><img src="{{url_for('static', filename='img/tab3.jpg')}}" alt=""></figure>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+  <!--end Perform during your interview-->
+
+
+  <!-- Featured Jobs -->
+  <section class="job-section-four layout-pt-120 layout-pb-120 section-bg-color">
+    <div class="section-bg-color__item"></div>
+
+    <div class="auto-container">
+      <div class="row justify-content-between align-items-end">
+        <div class="col-lg-6">
+          <div class="">
+            <h2 class="fw-700">Featured Jobs</h2>
+          </div>
+        </div>
+
+        <div class="col-auto">
+          <a href="{{url_for('jobs.job_list')}}" class="button-icon -arrow">
+            Browse All
+            <span class="fa fa-angle-right"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row mt-50 wow fadeInUp">
+
+        {% if jobs %}
+        {% for job in jobs.items[:4] %}
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+          <div class="job-block -type-2">
+            <div class="inner-box">
+              <div class="inner-header">
+                <div class="icon-wrap">
+                  <div class="icon flaticon-promotion"></div>
+                </div>
+                <div class="title">{{job.category}}</div>
+              </div>
+
+              <div class="inner-content">
+                <h4><a href="{{ url_for('jobs.profile', job_id=job.id) }}">{{ job.title }}</a></h4>
+                <ul class="job-other-info">
+                  <li class="privacy">
+                    <span class="icon fa fa-map-marker-alt"></span>
+                    {{ job.company.location }}
+                  </li>
+                  <li class="time">{{job.type}}</li>
+                </ul>
+              </div>
+
+              <div class="inner-footer">
+                <div class="content">
+                  <!-- <div class="days">{{ job.date_posted }}</div> -->
+                  <div class="company-name"><a href="{{ url_for('employer.profile', company_id=job.company.id) }}">{{job.company.name}}</a></div>
+                </div>
+                <span class="company-logo"><a href="{{ url_for('employer.profile', company_id=job.company.id) }}"><img src="{{ url_for('static', filename='employer/logo/' + job.company.logo) }}" alt=""></a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+            <p>No Posted Jobs yet. Check later.</p>
+        {% endif %}
+
+       
+      </div>
+    </div>
+  </section>
+  <!-- End Job Section -->
+
+
+
+  <!--Our Approach for career success as a woman in STEM-->
+  <section class="work-section">
+    <div class="auto-container">
+      <div class="sec-title text-center">
+        <h2><b>Our Approach for career success as a woman in STEM</b></h2>
+        <p class="text">Unlocking doors for women in the job market…</p>
+      </div>
+
+      <div class="row wow fadeInUp">
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+          <div class="inner-box" style="border: 1px solid #f0f0f0;">
+            <figure class="image"><img src="{{url_for('static', filename='img/step1.jpg')}}" alt="" style="text-align: center; padding: 5%;"></figure>
+            <h5><b><span style="color: red;">01 </span> Resume</b></h5>
+            <p>Create your resume using one of these templates</p>
+          </div>
+        </div>
+
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+          <div class="inner-box" style="border: 1px solid #f0f0f0;">
+            <figure class="image"><img src="{{url_for('static', filename='img/step2.jpg')}}" alt="" style="text-align: center; padding: 5%;"></figure>
+            <h5><b><span style="color: red;">02 </span> Employability Workshop</b></h5>
+            <p>Sign up for our employability workshop training</p>
+          </div>
+        </div>
+
+        <!-- Work Block -->
+        <div class="work-block col-lg-4 col-md-6 col-sm-12">
+          <div class="inner-box" style="border: 1px solid #f0f0f0;">
+            <figure class="image"><img src="{{url_for('static', filename='img/step3.jpg')}}" alt="" style="text-align: center; padding: 5%;"></figure>
+            <h5><b><span style="color: red;">03 </span> Mentoring Program</b></h5>
+            <p>Access our mentoring retention program to facilitate leadership and career advancement</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--end Our Approach for career success as a woman in STEM-->
+
+
+
+  <!-- Testimonials Section -->
+  <section class="layout-pt-120 layout-pb-120 section-bg-color -light">
+    <div class="section-bg-color__item -light"></div>
+
+    <div class="auto-container">
+      <div class="row justify-content-center text-center">
+        <div class="col-auto">
+          <div class="">
+            <h2 class="fw-700">Our success stories</h2>
+            <div class="text mt-9">This is what our women are saying…</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="job-carousel pt-50 wow fadeInUp owl-carousel owl-theme default-dots">
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/1.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Recognizing the Impact of iSTEM Co</h4>
+            <p>
+              I wanted to thank you for the great job that you are doing. I become familiar with Morely at Victoria University in one of the water advisory board meetings. Then, I become familiar with iSTEM as a talent-sourcing company, that promotes women and provides job opportunities for them in various sectors, concerning their abilities and talents regardless of their sex and race. I have also participated in the career fair event organized by you, and through this event, I had a chance to get to know many bright people and network with the industry.
+              You both helped me to introduce myself as a qualified and skilfulness person who is able to carry out her career whether in a team or independently, and now that I am starting a new position as an Internship in South East Water.
+              I hope the iSTEM grows fast in promoting women in STEM and more women can get a chance to become familiar with their capabilities.        
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Maedeh</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/2.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Informative</h4>
+            <p>
+              The first meeting held by Morley and Ruwangi from iSTEM Co. for the ongoing internship was very informative. We were given a packet of information that included noting down everyday schedules, making sure we are in speed, bring whole self to work in different ways and setting the goal of getting the team to reflect on the company's behavior. They also posed a series of questions like what will work well and what can we do better. 
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Aayusha Singh</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/3.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Gaining Practical Experience</h4>
+            <p>
+              I am happy with iSTEM Co. regarding the internship opportunity at South East Water. I was looking for a place similar to my research work that will give me an excellent opportunity to avail myself of field experience and enrich my practical knowledge. iSTEM Co. helps me to find out that. I am grateful to Dr. Morley and Dr. Ruwangi for their friendly support and for providing me with this opportunity.
+              I wish them the best of luck in the future. 
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Shamima</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/2.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Breaking Barriers</h4>
+            <p>
+              As a MSc graduate in Cyber Security from Deakin University with an Engineering background obtained overseas, I desperately needed to have an opportunity of applying my skills acquired during my study to real life application. Working with iSTEM Co. has improved my Digital literacy and given me a sense of purpose. I work to ensure security and safety across iSTEM Co.’s networks. As a new mum, a migrant and a woman of colour, I have tried to apply for work in several organisations with no results. I have experienced the bias and challenges involved in securing employment in the ICT sector. iSTEM Co. has given me hope to dream again and what is more interesting is that I get to invest my time and skills to make a social change that transforms workplaces for women from vulnerable backgrounds.            
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Dakorim</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/3.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>From Struggling Graduate to Thriving Intern</h4>
+            <p>
+              After completing my bachelors in Software and Mobile App Development at Victoria University, I struggled with employment. No company was willing to take the risk of employing a fresh graduate with no experience. iSTEM Co. gave me the opportunity to apply my learning to real-life applications. The wealth of knowledge and digital advancement    I have acquired since beginning my internship with iSTEM Co. is incredible. I get to work with Dr Ruwangi Fernando, an expert Data Scientist and a team of specialised ICT professionals. I am glad to be given a chance.            
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Jean</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+  <!-- End Testimonials Section -->
+
+
+  
+    <!-- News Section -->
+    <section class="work-section">
+      <div class="auto-container">
+        <div class="sec-title-outer">
+          <div class="sec-title">
+            <h2><b>Latest news</b></h2>
+            <div class="text">
+              Subscribe to our newsletter: mail chimp, linkedin
+            </div>
+          </div>
+          <a href="{{url_for('main.blog')}}" class="link">Browse All <span class="icon fa fa-angle-right"></span></a>
+        </div>
+
+        <div class="row wow fadeInUp">
+
+          <!-- News Block -->
+          <div class="news-block col-lg-3 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <div class="image-box">
+                <figure class="image"><img src="{{url_for('static', filename='img/resource/news4.png')}}" alt="" /></figure>
+              </div>
+              <div class="lower-content">
+                <ul class="post-meta">
+                  <li><a href="{{url_for('main.blog')}}">February 7, 2023</a></li>
+                  <li><a href="{{url_for('main.blog')}}">0 Comment</a></li>
+                </ul>
+                <h3><a href="{{url_for('main.blog')}}">Why people get rejected for jobs?</a></h3>
+                <!-- <p class="text">A job ravenously while Far much that one rank beheld after outside....</p>
+                <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a> -->
+              </div>
+            </div>
+          </div>
+
+
+          <!-- News Block -->
+          <div class="news-block col-lg-3 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <div class="image-box">
+                <figure class="image"><img src="{{url_for('static', filename='img/resource/news3.png')}}" alt="" /></figure>
+              </div>
+              <div class="lower-content">
+                <ul class="post-meta">
+                  <li><a href="{{url_for('main.blog')}}">February 3, 2023</a></li>
+                  <li><a href="{{url_for('main.blog')}}">0 Comment</a></li>
+                </ul>
+                <h3><a href="{{url_for('main.blog')}}">Why are companies adopting remote working for their employees today: Pros and Cons</a></h3>
+                <!-- <p class="text">A job ravenously while Far much that one rank beheld after outside....</p>
+                <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- News Block -->
+          <div class="news-block col-lg-3 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <div class="image-box">
+                <figure class="image"><img src="{{url_for('static', filename='img/resource/news1.png')}}" alt="" /></figure>
+              </div>
+              <div class="lower-content">
+                <ul class="post-meta">
+                  <li><a href="{{url_for('main.blog')}}">February 3, 2023</a></li>
+                  <li><a href="{{url_for('main.blog')}}">0 Comment</a></li>
+                </ul>
+                <h3><a href="{{url_for('main.blog')}}">9 ways to brand your business using social media</a></h3>
+                <!-- <p class="text">A job ravenously while Far much that one rank beheld after outside....</p>
+                <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- News Block -->
+          <div class="news-block col-lg-3 col-md-6 col-sm-12">
+            <div class="inner-box">
+              <div class="image-box">
+                <figure class="image"><img src="{{url_for('static', filename='img/resource/news2.png')}}" alt="" /></figure>
+              </div>
+              <div class="lower-content">
+                <ul class="post-meta">
+                  <li><a href="{{url_for('main.blog')}}">February 2, 2023</a></li>
+                  <li><a href="{{url_for('main.blog')}}">0 Comment</a></li>
+                </ul>
+                <h3><a href="{{url_for('main.blog')}}">Modern Art of Networking in STEM Workplace</a></h3>
+                <!-- <p class="text">A job ravenously while Far much that one rank beheld after outside....</p>
+                <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End News Section -->
+
+
+    <!-- Subscribe Section -->
+    <section class="subscribe-section-two -type-2">
+      <!-- <div class="background-image" style="background-image: url(../static/images/index-12/subs/bg.png);"></div> -->
+      <div class="background-image" style="background-color: #004aad;"></div>
+      <div class="auto-container wow fadeInUp">
+        <div class="sec-title text-center light">
+          <h2>Subscribe Our Newsletter</h2>
+          <div class="text">Advertise your jobs to millions of monthly users and search 15.8 million<br> CVs in our database.</div>
+        </div>
+
+        <div class="subscribe-form">
+          <form method="post" action="#">
+            <div class="form-group">
+              <div class="response"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" class="email" value="" placeholder="Your e-mail" required>
+              <button type="button" id="subscribe-newslatters" class="theme-btn btn-style-one">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- End Subscribe Section -->
+
+
+
+{% endblock %}

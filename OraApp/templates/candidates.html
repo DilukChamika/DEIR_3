@@ -1,0 +1,78 @@
+
+{% extends 'base.html' %}
+{% block container %}
+                          
+<div class="bg-white">
+
+<br>
+
+      <!--Page Title-->
+      <section class="page-title style-two">
+        <div class="auto-container">
+          <div class="title-outer">
+                  <h1>Candidates</h1>
+                  <ul class="page-breadcrumb">
+                      <li><a href="{{url_for('main.home')}}">Home</a></li>
+                      <li>Candidates</li>
+                  </ul> 
+              </div>
+
+        </div>
+      </section>
+      <!--End Page Title-->
+  
+      <!-- Listing Section -->
+      <section class="ls-section">
+        <div class="auto-container">
+          <div class="filters-backdrop"></div>
+  
+          <div class="row">
+            <!-- Content Column -->
+            <div class="content-column col-lg-12">
+              <div class="ls-outer">
+                
+  
+                <div class="row">
+                  <!-- Candidate block Four -->
+                  {% for candidate in candidates %}
+                  <div class="candidate-block-four col-lg-3 col-md-3 col-sm-6">
+                    <div class="inner-box">
+                      <!-- <ul class="job-other-info">
+                        <li class="green">Featured</li>
+                      </ul> -->
+                      <!-- <span class="thumb"><img src="images/resource/candidate-1.png" alt=""></span> -->
+                      <h3 class="name">{{candidate.id}}</h3>
+                      <!-- <span class="cat">UI Designer</span> -->
+                      <!-- <ul class="job-info">
+                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                      </ul> -->
+                      <br>
+                      <a href="{{ url_for('applicant.userprofile', applicant_id=candidate.id, applicant_user_id=candidate.user_id) }}" class="theme-btn btn-style-three">View Profile</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+  
+             
+                </div>
+  
+         
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--End Listing Page Section -->
+
+
+
+
+
+  
+
+
+<hr style="height: 4px;">
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

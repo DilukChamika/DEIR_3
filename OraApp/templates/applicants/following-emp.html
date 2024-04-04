@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block container %}
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Following Employers</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Ls widget -->
+          <div class="ls-widget">
+            <div class="tabs-box">
+
+              <br><br>
+             
+              <div class="widget-content">
+                <div class="table-outer">
+                  {% if notifications %}
+
+                  
+                 
+                 
+                  {% else %}
+                  <div class="d-flex align-items-center">
+                    <p>No any following employers found.</p>
+                    
+                  </div>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+  
+
+
+
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}{% endblock %}

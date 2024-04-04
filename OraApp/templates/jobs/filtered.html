@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<br>
+
+{% include 'job-search.html' %}
+
+
+<section class="ls-section">
+    <div class="auto-container">
+
+      <div class="row">
+        
+
+        <!-- Content Column -->
+        <div class="content-column col-lg-12">
+          <div class="ls-outer">
+            <!-- ls Switcher -->
+            <div class="ls-switcher">
+              <div class="showing-result show-filters">
+                <div class="text">{{ head }}: <span class="text-muted">{{ jobs.total }}</span></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Job Block -->
+            {% if jobs %}
+                {% for job in jobs.items %}
+              <div class="job-block col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                  <div class="content">
+                    {% if job.company %}
+                    <span class="company-logo"><a href="{{ url_for('employer.profile', company_id=job.company.id) }}"><img src="{{ url_for('static', filename='employer/logo/' + job.company.logo) }}" alt=""></a></span>
+                    <h4><a href="{{ url_for('jobs.profile', job_id=job.id) }}">{{ job.title }}</a></h4>
+                    {% else %}
+                    <p>No company information available</p>
+                    {% endif %}
+                    <ul class="job-info">
+                      <li><span class="icon flaticon-briefcase"></span> {{job.type}}</li>
+                      <li><span class="icon flaticon-map-locator"></span> {{ job.company.location }}</li>
+                      <li><span class="icon flaticon-clock-3"></span>{{ job.date_posted.strftime("%d %b, %Y") }}</li>
+                        {% if job.salary %}
+                                <li><span class="icon flaticon-money"></span>{{ (job.salary | numberFormat)}}</li>
+                        {% else %}
+                                <li><span class="icon flaticon-money"></span>Not Specified</li>
+                        {% endif %}
+                    </ul>
+                    <ul class="job-other-info">
+                      
+                        {% if current_user.is_authenticated and current_user.applicants and job in current_user.applicants.applied_jobs %}
+                        <li class="time">
+                            <span class="text-success ms-auto">Applied <i class="fa fa-check-square-o"></i></span>
+                        </li>
+                        {% endif %}
+                      
+                      <!-- <li class="privacy">Private</li>
+                      <li class="required">Urgent</li> -->
+                    </ul>
+                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            {% else %}
+                <p>No Posted Jobs yet. Check later.</p>
+            {% endif %}
+
+
+
+            </div>
+
+            {% if jobs.total > jobs.per_page %}
+            {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if jobs.page == page_num %}
+                        <a href="{{ url_for('jobs.filtered', category=jobs.items[0].category, page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                    {% else %}
+                        <a href="{{ url_for('jobs.filtered', category=jobs.items[0].category, page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            <!-- Pagination -->
+            <!-- <nav class="ls-pagination mb-5">
+              <ul>
+                <li class="prev"><a href="#"><i class="fa fa-arrow-left"></i></a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#" class="current-page">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
+              </ul>
+            </nav> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section id="jobs-list" class="bg-light py-5">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="">{{ head }}: <span class="text-muted">{{ jobs.total }}</span></h2>
+        </div>
+        
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-2">
+            {% if jobs %}
+                {% for job in jobs.items %}
+                    <div class="col">
+                        <div class="bg-white border p-3 jobs-card h-100">
+                            <div class="d-flex">
+                                <div class="">
+                                    {% if job.company %}
+                                    <a href="{{ url_for('employer.profile', company_id=job.company.id) }}" class="profile-img-ctn prof-sm">
+                                        <img src="{{ url_for('static', filename='employer/logo/' + job.company.logo) }}" alt="">
+                                    </a>
+                                    {% else %}
+                                    <p>No company information available</p>
+                                    {% endif %}
+                                </div>
+
+                                <div class="w-100 ms-2">
+                                    <div class="border-bottom d-flex align-items-center">
+                                        <small class="text-muted"><i class="fa fa-calendar t-prim"></i> {{ job.date_posted.strftime("%d %b, %Y") }}</small>
+
+                                        {% if current_user.is_authenticated and current_user.applicants and job in current_user.applicants.applied_jobs %}
+                                            <span class="text-success ms-auto">Applied <i class="fa fa-check-square-o"></i></span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <h3 class="d-block text-dark m-0">{{ job.title }}</h3>
+                                <p class="text-muted"><i class="fa fa-map-marker t-prim"></i> {{ job.company.location }}</p>
+                                <p class="d-flex m-0 align-items-end">
+                                    {% if job.salary %}
+                                        <small>
+                                            <i class="fa fa-money t-prim"></i> KSh. {{ (job.salary | numberFormat)}}
+                                        </small>
+                                    {% else %}
+                                        <small>
+                                            <i class="fa fa-money t-prim"></i> KSh. Not Specified
+                                        </small>
+                                    {% endif %}
+                                    <a href="{{ url_for('jobs.profile', job_id=job.id) }}" class="btn btn-sm btn-brand prim text-light ms-auto">{{ job.type }}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No Posted Jobs yet. Check later.</p>
+            {% endif %}
+        </div>
+        {% if jobs.total > jobs.per_page %}
+            {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if jobs.page == page_num %}
+                        <a href="{{ url_for('jobs.filtered', category=jobs.items[0].category, page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                    {% else %}
+                        <a href="{{ url_for('jobs.filtered', category=jobs.items[0].category, page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</section> -->
+
+{% endblock %}
+{% block script %}{% endblock %}

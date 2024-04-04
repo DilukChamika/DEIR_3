@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+<div class="bg-white">
+
+<section class="candidate-detail-section">
+    <!-- Upper Box -->
+    <div class="upper-box">
+      <div class="auto-container">
+        <!-- Candidate block Five -->
+        <div class="candidate-block-five">
+            <div class="row">
+                <div class="col-lg-2 col-md-2"></div>
+                    <div class="inner-box  col-lg-8 col-md-8 col-sm-12">
+            
+                        <div class="content">
+                        <!-- <figure class="image"><img src="{{ url_for('static', filename='applicant/image/' + applicant.image) }}" alt=""></figure> -->
+                        <h4 class="name">Applicant ID : {{applicant.id}}</h4>
+                        <!-- <h5 class="name">{{applicant.f_name}} {{applicant.l_name}}</h5> -->
+                        <!-- <ul class="candidate-info">
+                            <li class="designation">UI Designer at Invision</li>
+                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                            <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                            <li><span class="icon flaticon-clock"></span> Member Since,Aug 19, 2020</li>
+                        </ul>
+                        <ul class="post-tags">
+                            <li><a href="#">App</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Digital</a></li>
+                        </ul> -->
+                        </div>
+                    </div>
+                <div class="col-lg-2 col-md-2"></div>
+            </div>
+
+            <!-- <div class="btn-box">
+              <a href="#" class="theme-btn btn-style-one">Download CV</a>
+              <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
+            </div> -->
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="candidate-detail-outer">
+      <div class="auto-container">
+        <div class="row">
+        <div class="col-lg-2 col-md-2"></div>
+          <div class="content-column col-lg-8 col-md-8 col-sm-12">
+            <div class="job-detail">
+              <h4>About Candidate</h4>
+
+              <!-- Resume / Education -->
+              <div class="resume-outer">
+                <div class="upper-title">
+                  <h4>Education</h4>
+                </div>
+                <!-- Resume BLock -->
+                <!-- <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">M</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3>Bachlors in Fine Arts</h3>
+                        <span>Modern College</span>
+                      </div>
+                      <div class="edit-box">
+                        <span class="year">2012 - 2014</span>
+                      </div>
+                    </div>
+                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante<br> ipsum primis in faucibus.</div>
+                  </div>
+                </div> UPDATED BELOW-->
+              
+                <p>{{censored_info}}</p>
+
+                <!-- Resume BLock -->
+                <!-- <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">H</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3>Computer Science</h3>
+                        <span>Harvard University</span>
+                      </div>
+                      <div class="edit-box">
+                        <span class="year">2008 - 2012</span>
+                      </div>
+                    </div>
+                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante<br> ipsum primis in faucibus.</div>
+                  </div>
+                </div> -->
+              </div>
+
+              <!-- Resume / Work & Experience -->
+              <div class="resume-outer theme-blue">
+                <div class="upper-title">
+                  <h4>Courses</h4>
+                </div>
+                <!-- Resume BLock -->
+                <p>{{applicant_about.courses}}</p>
+                <!-- <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">S</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3>Product Designer</h3>
+                        <span>Spotify Inc.</span>
+                      </div>
+                      <div class="edit-box">
+                        <span class="year">2008 - 2012</span>
+                      </div>
+                    </div>
+                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante<br> ipsum primis in faucibus.</div>
+                  </div>
+                </div> -->
+
+                <!-- Resume BLock -->
+                <!-- <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">D</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3>Sr UX Engineer</h3>
+                        <span>Dropbox Inc.</span>
+                      </div>
+                      <div class="edit-box">
+                        <span class="year">2012 - 2014</span>
+                      </div>
+                    </div>
+                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante<br> ipsum primis in faucibus.</div>
+                  </div>
+                </div> -->
+              </div>
+
+             
+            </div>
+          </div>
+
+        <div class="col-lg-2 col-md-2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="height: 4px;">
+</div>
+{% endblock %}

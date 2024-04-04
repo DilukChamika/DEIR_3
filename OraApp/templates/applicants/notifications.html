@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block container %}
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Job Alerts & Notifications</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Ls widget -->
+          <div class="ls-widget">
+            <div class="tabs-box">
+
+              <br>
+
+
+             
+              <div class="widget-content">
+                <div class="table-outer">
+                  {% if notifications %}
+
+                  <ul class="list-group list-group-flush">
+                    {% for notification in notifications %} 
+                      <li><span class="icon flaticon-briefcase"></span> {{ notification.content }}</li>
+                      <br>
+                    {% endfor %}
+                </ul>
+
+
+                 
+                  {% else %}
+                  <div class="d-flex align-items-center">
+                    <p>No any job alerts or notifications found.</p>
+                    <!-- <a href="{{ url_for('jobs.job_list') }}" class="btn btn-sm ms-auto btn-success my-2 text-light">Find More Jobs</a> -->
+                    
+                  </div>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+  
+
+
+
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}{% endblock %}

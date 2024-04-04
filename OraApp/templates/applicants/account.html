@@ -1,0 +1,499 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+
+
+<section class="user-dashboard ">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Applications statistics</h3>
+      </div>
+      <div class="row">
+        <div class="col-xl-2"></div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item">
+            <div class="left">
+              <i class="icon flaticon-briefcase"></i>
+            </div>
+            <a href="{{ url_for('applicant.jobs_applied') }}">
+                <div class="right">
+                <h4>{{ jobs|length }}</h4>
+                <p>Applied Jobs</p>
+                </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-2"></div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item ui-green">
+            <div class="left">
+              <i class="icon la la-bookmark-o"></i>
+            </div>
+            <a href="{{ url_for('applicant.shortlisted_jobs') }}">
+                <div class="right">
+                <h4>{{ shortlists|length }}</h4>
+                <p>Shortlisted Jobs</p>
+                </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-2"></div>
+        <!-- <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item ui-yellow">
+            <div class="left">
+              <i class="icon la la-comment-o"></i>
+            </div>
+            <div class="right">
+              <h4>74</h4>
+              <p>Views</p>
+            </div>
+          </div>
+        </div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item ui-green">
+            <div class="left">
+              <i class="icon la la-bookmark-o"></i>
+            </div>
+            <div class="right">
+              <h4>32</h4>
+              <p>Shortlisted Jobs</p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="row">
+
+        <h4>Analytics</h4>
+            
+            <br/><br>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12"> <!-- Center the first column -->
+                    <div class="graph-widget ls-widget" style="position: relative;">
+                        <div class="tabs-box">
+                            <div class="widget-content" style="position: relative;">
+                                <canvas id="myBarChart" width="500" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12"> <!-- Center the third column -->
+                    <div class="graph-widget ls-widget" style="position: relative;">
+                        <div class="tabs-box">
+                            <div class="widget-content" style="position: relative;">
+                                <canvas id="myDifferentBarChart" width="500" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-6 col-lg-6 col-md-12"> <!-- Center the second column -->
+                    <div class="graph-widget ls-widget" style="position: relative;">
+                        <div class="tabs-box">
+                            <div class="widget-content" style="position: relative;">
+                                <canvas id="myPieChart" width="600" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12">
+                    <div class="graph-widget ls-widget">
+                      <div class="tabs-box">
+                        <div class="widget-title">
+                          <h4>Your Profile Views</h4>
+                           <div class="chosen-outer">
+                            <select class="chosen-select">
+                              <option>Last 6 Months</option>
+                              <option>Last 12 Months</option>
+                              <option>Last 16 Months</option>
+                              <option>Last 24 Months</option>
+                              <option>Last 5 year</option>
+                            </select>
+                          </div> 
+                        </div>
+          
+                        <div class="widget-content">
+                          <canvas id="chart" width="100" height="45"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                </div> -->
+
+
+                <div class="col-xl-6 col-lg-6 col-md-12">
+                  <div class="notification-widget ls-widget">
+                    <div class="widget-title">
+                      <h4>Notifications</h4>
+                    </div>
+                    <div class="widget-content">
+                      {% if notifications %}
+                      <ul class="notification-list">
+                        {% for notification in notifications %}
+                        <li><span class="icon flaticon-briefcase"></span> <strong>{{ notification.content }}</strong></li>
+                        {% endfor %}
+                      </ul>
+                      {% else %}
+                        <p>No notifications available.</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>  
+                
+
+                
+            </div>
+
+
+        
+
+        
+
+
+        <!-- <div class="col-lg-12">
+          <div class="applicants-widget ls-widget">
+            <div class="widget-title">
+              <h4>Jobs Applied Recently</h4>
+            </div>
+            <div class="widget-content">
+              <div class="row">
+                <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                  <div class="inner-box">
+                    <div class="content">
+                      <figure class="image"><img src="images/resource/candidate-1.png" alt=""></figure>
+                      <h4 class="name"><a href="#">Darlene Robertson</a></h4>
+                      <ul class="candidate-info">
+                        <li class="designation">UI Designer</li>
+                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                      </ul>
+                      <ul class="post-tags">
+                        <li><a href="#">App</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Digital</a></li>
+                      </ul>
+                    </div>
+                    <div class="option-box">
+                      <ul class="option-list">
+                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                        <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
+                        <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
+                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                  <div class="inner-box">
+                    <div class="content">
+                      <figure class="image"><img src="images/resource/candidate-2.png" alt=""></figure>
+                      <h4 class="name"><a href="#">Wade Warren</a></h4>
+                      <ul class="candidate-info">
+                        <li class="designation">UI Designer</li>
+                        <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                      </ul>
+                      <ul class="post-tags">
+                        <li><a href="#">App</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Digital</a></li>
+                      </ul>
+                    </div>
+                    <div class="option-box">
+                      <ul class="option-list">
+                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                        <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
+                        <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
+                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+    
+
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}
+
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+
+<script>
+    var ctx = document.getElementById('myPieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Confidence', 'Ethical', 'Leadership'],
+            datasets: [{
+                label: 'Data',
+                data: [10, 30, 40],
+                backgroundColor: [
+                    '#3e6181',
+                    '#149dc1',
+                    '#15d5d1'
+                ],
+                borderWidth: 1,
+                hoverBorderColor: "black",
+                hoverBorderWidth: 2,
+                hoverBackgroundColor: 'rgba(154, 245, 140)',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+
+   // Fetch the posted job count
+    fetch("/applicant/person-score-chart/")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const percentageScores = data.person_score;
+            console.log('PercentageScores', percentageScores);
+
+            // Update the Pie Chart data dynamically
+            myPieChart.data.datasets[0].data = [
+                percentageScores.confidence,
+                percentageScores.ethical,
+                percentageScores.leadership
+            ];
+
+            myPieChart.update(); // Update the chart
+        })
+        .catch(error => console.error('Fetch error:', error));
+
+
+        var initialData = [0, 0, 30, 40];
+            var ctx = document.getElementById('myBarChart').getContext('2d');
+            var myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Primary Edu.', 'Secondary Edu.', 'Higher Edu.', 'Courses'],
+                    datasets: [{
+                        label: 'Bar Graph',
+                        data: initialData, // Hardcoded data
+                        backgroundColor: [
+                            '#f4e2f1',   // Color for Posted Jobs
+                            '#bc9cdc',    // Color for Applicants
+                            '#8a04fc', // Color for Shortlisted
+                            '#4c0cc4'       // Color for Notifications
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: false, // Disable responsiveness
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+
+                }
+            });
+
+
+            // // Different Bar Chart
+                var ctxDifferentBar = document.getElementById('myDifferentBarChart').getContext('2d');
+                var initialDataDifferentBar = [0, 0, 30, 40];
+                var myDifferentBarChart = new Chart(ctxDifferentBar, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Primary Edu.', 'Secondary Edu.', 'Higher Edu.', 'Courses'],
+                        datasets: [{
+                            label: 'Different Bar Graph',
+                            data: initialDataDifferentBar,
+                            backgroundColor: [
+                                '#f4e2f1',   // Color for Posted Jobs
+                                '#bc9cdc',    // Color for Applicants
+                                '#8a04fc', // Color for Shortlisted
+                                '#4c0cc4'       // Color for Notifications
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            // Fetch the counts for courses studied
+            fetch("/applicant/education_details/")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const courseCounts = data.course_counts;
+                    const primaryedu = data.primary_count;
+                    const secondedu = data.secondary_count;
+                    const higher_count = data.higher_count;
+
+                    console.log('CourseCounts', courseCounts);
+                    console.log('PrimaryEdu ', primaryedu);
+
+                    // Update the Bar Chart data dynamically
+                    myBarChart.data.datasets[0].data = Object.values(courseCounts);
+                    myBarChart.data.labels = Object.keys(courseCounts);
+
+                    myBarChart.update(); // Update the chart
+
+                    // Update the Bar Chart data dynamically
+                    myDifferentBarChart.data.datasets[0].data = [
+                        educationCounts.primary_count,
+                        educationCounts.secondary_count,
+                        educationCounts.higher_count,
+                    ];
+                    myDifferentBarChart.data.labels = ['Primary Edu.', 'Secondary Edu.', 'Higher Edu.'];
+
+                    myDifferentBarChart.update(); // Update the chart
+                })
+                .catch(error => console.error('Fetch error:', error));
+        
+
+            
+                // // Fetch education details and update the chart
+                //     fetch("/applicant/extract-details/")
+                //         .then(response => {
+                //             if (!response.ok) {
+                //                 throw new Error(`HTTP error! Status: ${response.status}`);
+                //             }
+                //             return response.json();
+                //         })
+                //         .then(data => {
+                //             const educationCounts = data;
+
+                //             // Update the Bar Chart data dynamically
+                //             myDifferentBarChart.data.datasets[0].data = [
+                //                 educationCounts.primary_count,
+                //                 educationCounts.secondary_count,
+                //                 educationCounts.higher_count,
+                //             ];
+                //             myDifferentBarChart.data.labels = ['Primary Edu.', 'Secondary Edu.', 'Higher Edu.'];
+
+                //             myDifferentBarChart.update(); // Update the chart
+                //         })
+                //         .catch(error => console.error('Fetch error:', error));
+                  // document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+                  //     var canvasElements = document.getElementById('myDifferentBarChart');
+                    //   var images = [];
+
+                    //   // Convert canvas elements to images
+                    //   for (var i = 0; i < canvasElements.length; i++) {
+                    //     var canvas = canvasElements[i];
+                    //     var image = canvas.toDataURL('image/jpeg', 1.0);
+                    //     console.log('Image URLs',image);
+                    //     images.push(image);
+                    //   }
+
+                    //   console.log('Captured Images:', images);
+                    //   console.log('Number of images',images.length);
+                    //   if (images.length === 0) {
+                    //     console.error('No canvas elements found.');
+                    //     return;
+                    //   }
+                      
+                      
+                    //   // Generate PDF
+                    //   var pdf = new jsPDF();
+                    //   var yOffset = 10;
+
+                    //   images.forEach(function (image) {
+                    //   console.log('inside Image transform');
+                      
+                    // });
+
+                    //   // Download PDF
+                    //   pdf.save('charts.pdf');
+                    // });
+                  //  function downloadChartsAsPDF() {
+                  //     // Create a new jsPDF instance
+                  //     var pdf = new jsPDF();
+
+                  //     // Define a function to add chart canvas to the PDF
+                  //     function addChartToPDF(canvas, index) {
+                  //       // Convert canvas to data URL
+                  //       var imgData = canvas.toDataURL('image/png');
+
+                  //       // Add image to PDF
+                  //       pdf.addImage(imgData, 'PNG', 10, 10, 180, 120); // Adjust position and size as needed
+
+                  //       // Add new page if not the last canvas
+                  //       if (index < canvases.length - 1) {
+                  //         pdf.addPage();
+                  //       }
+                  //     }
+
+                  //     // Grab the canvas elements
+                  //     var canvas1 = document.getElementById("myDifferentBarChart");
+                  //     var canvas2 = document.getElementById("myPieChart");
+                  //     var canvas3 = document.getElementById("myBarChart");
+
+                  //     var canvases = [canvas1, canvas2, canvas3];
+
+                  //     // Add each canvas to the PDF
+                  //     canvases.forEach(addChartToPDF);
+
+                  //     // Save the PDF
+                  //     pdf.save('charts.pdf');
+                  //   }
+                  //   // Attach event listener to the button
+                  //     document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+                  //       // Call the downloadChartsAsPDF function when the button is clicked
+                  //       downloadChartsAsPDF();
+                  //     });
+            
+</script>
+
+
+
+{% endblock %}

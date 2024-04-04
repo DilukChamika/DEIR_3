@@ -1,0 +1,133 @@
+
+{% extends 'base.html' %}
+ 
+{% block container %}
+
+<div class="bg-white">
+
+<!--Page Title-->
+<br>
+<section class="page-title">
+    <div class="auto-container">
+      <div class="title-outer">
+        <h1>Our Story</h1>
+        <ul class="page-breadcrumb">
+          <li><a href="{{url_for('main.home')}}">Home</a></li>
+          <li>Our Story</li>
+        </ul>
+      </div>
+    </div>
+</section>
+  <!--End Page Title-->
+  <br>
+
+  <div class="auto-container">
+    <div class="row">
+      <figure class="image"><img src="{{url_for('static', filename='img/27A9484-1.jpg')}}" alt=""></figure>
+      <br>
+      <h3 style="color: #77838f;">
+        As migrant women in STEM and women of colour from CALD backgrounds, we have observed the extreme difficulties and challenges in securing employment within the STEM sector in Australia even with PhDs in Engineering and Data Science. 
+      </h3>
+      <br>
+      <p align="justify">
+        <br>
+        When Morley moved to Australia from the UK with a Bachelors and Masters degree both in Engineering from top British schools on the skilled migration program, she felt she had her dreams come through but was disappointed to see that she couldn’t secure a job with employers citing lack of experience as an issue even though these companies clearly had entry level jobs. This motivated her to pursue a PhD to gain some hands-on experience within Australia but the bias did not stop. A top company turned down her employment offer to casual after discovering she was pregnant. 
+        <br>
+        Morley is not alone as Ruwangi has experienced even more challenges being a woman of colour. Even with a PhD and full rights to work in Australia, in addition to being the founder of STEM Sisters, a leading women in STEM NFP organisation, securing a job has been fruitless with employers wanting an Australian citizen. However, those same employers would easily sponsor overseas candidates not based on qualification and experience alone but based on gender and race.
+        <br>
+        While businesses are pushing for diversity in hires, inclusion and retention of women in STEM including women of colour and women from CALD remains problematic.
+        <br>
+        As qualified STEM professionals with experience in championing and advocating for women in STEM, we know our diversity is a gift and we have a lot to offer. Our solution model is a win-win for women in STEM including women of colour and women from CALD as well as Australian STEM companies as the women can now apply their skills and talents while the companies in turn can achieve their diversity targets and increase their profit margin.
+      </p>
+
+    </div>
+  </div>
+
+
+  <section class="about-section-three">
+    <div class="auto-container">
+      <div class="images-box">
+        <div class="row">
+          <div class="column col-lg-4 col-md-4 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/20191030_BusinessStart-finalistsjudges-1080x675-2-768x480.jpg')}}" alt=""></figure>
+          </div>
+          <div class="column col-lg-4 col-md-4 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/Job-Search-Intensive-Workshop-Participants-July-18-2018-scaled-1-768x512.jpg')}}" alt=""></figure>
+          </div>
+          <div class="column col-lg-4 col-md-4 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/IMG_2908-1-scaled-1-768x512.jpg')}}" alt=""></figure>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </section>
+
+  <div class="auto-container">
+    <h1><b>Why DEIR?</b></h1>
+    <div class="row">
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-3 col-md-3">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/DEIR-Business-Plan-1-300x147.png')}}" alt=""></figure>
+        <p class="text">Women represent only 29% of the university-qualified STEM workforce in Australia</p>
+        </center>
+      </div>
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-3 col-md-3">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/Screenshot-2023-06-23-145922.png')}}" alt=""></figure>
+        <p class="text">STEM Women face a gender pay gap of 22 %</p>
+        </center>
+      </div>
+      <div class="col-lg-2 col-md-2"></div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-3 col-md-3">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/DEIR-Business-Plan-2.png')}}" alt=""></figure>
+        <p class="text">Only 12% of women are working in Construction and Engineering in Australia.</p>
+        </center>
+      </div>
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-2 col-md-2">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/DEIR-Business-Plan-5.png')}}" alt=""></figure>
+        <p class="text">Women make up less than a third of the Australian STEM university graduated workforce.</p>
+        </center>
+      </div>
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-3 col-md-3">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/DEIR-Business-Plan-3.png')}}" alt=""></figure>
+        <p class="text">Australian economy would grow by $25 billion if more women are supported into work</p>
+        </center>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-3 col-md-3">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/DEIR-Business-Plan-4.png')}}" alt=""></figure>
+        <p class="text">Women working full-time in STEM who took a career break for the arrival of a child likely earned less in 2016 than the ones who didn't</p>
+        </center>
+      </div>
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-3 col-md-3">
+        <center>
+        <figure class="image"><img src="{{url_for('static', filename='img/DEIR-Business-Plan-6.png')}}" alt=""></figure>
+        <p class="text">Racially diverse executive teams provided an advantage of 35% higher EBIT and 33% more long-term value creation.</p>
+        </center>
+      </div>
+      <div class="col-lg-2 col-md-2"></div>
+    </div>
+  </div>
+
+
+<hr style="height: 4px;">
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+<section class="pricing-section">
+    <div class="auto-container">
+        <div class="sec-title text-center">
+        <h2>Transcript </h2>
+        </div>
+
+
+        <div class="pricing-tabs tabs-box wow fadeInUp">
+            <div class="tabs-content">
+                <div class="tab active-tab" id="monthly">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2"></div>
+                            <div class="pricing-table col-lg-8 col-md-8 col-sm-12">
+                                <div class="inner-box">
+                                    <center>
+                                    <div>
+                                        <button onclick="generateTranscript()"  class="theme-btn btn-style-three">Generate Transcript</button>
+                                    </div>
+                                    <br><br><br>
+                                    <div id="transcriptDisplay">
+                                        <p id="transcriptStatus"></p>
+                                        <a id="transcriptLink" href="#" download>
+                                            <img src="../../static/img/paper.png" alt="File Icon" style="width: 50px; height: 50px;">
+                                        </a>
+                                        <p id="transcriptText">Transcript Document</p> <!-- Replace with appropriate text -->
+                                    </div>
+                                                
+                                    <br>
+                                </center>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<script>
+    function generateTranscript() {
+        fetch('/generate_transcript', {
+            method: 'POST' // or 'POST', depending on your route configuration
+        })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('transcriptStatus').innerText = 'Transcript generated successfully.';
+                    document.getElementById('transcriptLink').href = '/transcript_documents/transcript.txt';
+                    document.getElementById('transcriptLink').setAttribute('download', 'transcript.txt');
+                    document.getElementById('transcriptText').style.display = 'none'; // Hide the placeholder text
+                } else {
+                    throw new Error('Failed to generate transcript.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('transcriptStatus').innerText = 'Failed to generate transcript.';
+                document.getElementById('transcriptLink').style.display = 'none'; // Hide the link if there's an error
+                document.getElementById('transcriptText').innerText = 'Error: Failed to generate transcript.';
+            });
+    }
+</script>
+
+{% endblock %}

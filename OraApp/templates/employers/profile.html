@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+<section class="job-detail-section">
+    <!-- Upper Box -->
+    <div class="upper-box">
+      <div class="auto-container">
+        <!-- Job Block -->
+        <div class="job-block-seven style-three">
+          <div class="inner-box">
+            <div class="content">
+              <span class="company-logo"><img src="{{ url_for('static', filename='employer/logo/' + company.logo) }}" alt=""></span>
+              <h4>{{ company.name.capitalize() }}</h4>
+              <ul class="job-other-info">
+                <li class="time">Open Jobs –  {{ company.jobs | length }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-detail-outer bg-white">
+      <div class="auto-container">
+        <div class="row">
+          <div class="content-column col-lg-8 col-md-12 col-sm-12 order-2">
+            <div class="job-detail">
+              <h3>About {{ company.name.upper() }}</h3>
+              <br>
+              <h5><b>{{ company.tagline }}</b></h5>
+              <br>
+              <p>
+                {{ company.description }}
+              </p>
+              <!-- <div class="row images-outer">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                  <figure class="image"><a href="images/resource/employers-single-1.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-1.png" alt=""></a></figure>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                  <figure class="image"><a href="images/resource/employers-single-2.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-2.png" alt=""></a></figure>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                  <figure class="image"><a href="images/resource/employers-single-3.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-3.png" alt=""></a></figure>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                  <figure class="image"><a href="images/resource/employers-single-4.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-4.png" alt=""></a></figure>
+                </div>
+              </div> -->
+            </div>
+
+            <!-- Related Jobs -->
+            <div class="related-jobs">
+              <div class="title-box">
+                <h3>Jobs Posted: {{ company.jobs | length or 'No Posted Jobs Yet.' }}</h3>
+              </div>
+
+              {% for job in company.jobs %}
+              <!-- Job Block -->
+              <div class="job-block">
+                <div class="inner-box">
+                  <div class="content">
+                    <span class="company-logo"><img src="{{ url_for('static', filename='employer/logo/' + job.company.logo) }}" alt=""></span>
+                    <h4><a href="{{ url_for('jobs.profile', job_id=job.id) }}">{{ job.title }}</a></h4>
+                    <ul class="job-info">
+                      <li><span class="icon flaticon-briefcase"></span> {{ job.category }}</li>
+                      <li><span class="icon flaticon-map-locator"></span>{{ job.company.location }}</li>
+                      <li><span class="icon flaticon-clock-3"></span>{{ job.date_posted.strftime("%d %b, %Y") }}</li>
+                      {% if job.salary %}
+                      <li><span class="icon flaticon-money"></span>{{ job.salary | numberFormat}}</li>
+                      {% else %}
+                      <li><span class="icon flaticon-money"></span>Not Specified</li>
+                      {% endif %}
+                    </ul>
+                    <ul class="job-other-info">
+                      <li class="time">{{job.type}}</li>
+                      <!-- <li class="required">Urgent</li> -->
+                    </ul>
+                    <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+          </div>
+
+          <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
+            <aside class="sidebar pd-right">
+
+              <div class="sidebar-widget company-widget">
+                <div class="widget-content">
+                  <ul class="company-info mt-0">
+                    <li>Primary industry: <span>{{ company.tagline }}</span></li>
+                    <!-- <li>Company size: <span>501-1,000</span></li>
+                    <li>Founded in: <span>2011</span></li> -->
+                    <li>Phone: <span>{{ company.phone }}</span></li>
+                    <li>Email: <span>{{ company.user.email }}</span></li>
+                    <li>Location: <span>{{ company.location }}</span></li>
+                    <!-- <li>Social media:
+                      <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                      </div>
+                    </li> -->
+                  </ul>
+                    {% if company.website %}
+                        <li class="col">
+                            <div class="btn-box"><a href="http://{{ company.website }}" target = "_blank" class="theme-btn btn-style-three">{{ company.website }}</a></div>
+                        </li>
+                    {% endif %}
+
+                </div>
+              </div>
+
+              <!-- <div class="sidebar-widget">
+                <h4 class="widget-title">Job Location</h4>
+                <div class="widget-content">
+                  <div class="map-outer mb-0">
+                    <div class="map-canvas" data-zoom="12" data-lat="-37.817085" data-lng="144.955631" data-type="roadmap" data-hue="#ffc400" data-title="Envato" data-icon-path="images/resource/map-marker.png" data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>">
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- <div class="sidebar-widget contact-widget">
+                <h4 class="widget-title">Contact Us</h4>
+                <div class="widget-content">
+                  <div class="default-form">
+                    <form>
+                      <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                          <input type="text" name="username" placeholder="Your Name" required>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                          <input type="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                          <textarea class="darma" name="message" placeholder="Message"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                          <button class="theme-btn btn-style-one" type="submit" name="submit-form">Send Message</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div> -->
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section id="company-profile" class="bg-light py-3 min-vh">
+    <div class="container">
+        <h3 class="bg-teal-lgrad text-light p-3 mt-3">{{ company.name.capitalize() }}</h3>
+        <div class="row row-cols-1 g-3">
+            <div class="row row-cols-lg-2 row-cols-1 p-0 m-0 company-profile py-3">
+
+                <div class="col p-0 py-lg-0 py-5">
+                    <div class="d-flex align-items-center justify-content-center w-100 h-100 profile-logo-ctn py-5">
+                       <div class="backlayer"></div>
+                        <div class="logo-ctn rad-3">
+                            <img src="{{ url_for('static', filename='employer/logo/' + company.logo) }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col profile-content p-0">
+                   <div class="p-3">
+                        <p class="text-bold t-prim m-0">ABOUT {{ company.name.upper() }}</h5>
+                        <h1 class=" ">{{ company.tagline }}</h1>
+                        <p class="my-4">
+                            {{ company.description }}
+                        </p>
+                        <div class=" bg-white p-3 border rad-3">
+                            <ul class="p-0 row row-cols-2">
+                                <li class="col">
+                                    <p class="text-muted m-0"><i class="fa fa-map-marker t-prim"></i> {{ company.location }}</p>
+                                </li>
+                                <li class="col">
+                                    <a href="mailto:{{ company.user.email }}" target="_blank" class="text-dark text-muted"><i class="fa fa-envelope-o t-prim"></i> {{ company.user.email }}</a>
+                                </li>
+                                <li class="col">
+                                    <a href="tel:{{ company.phone }}" target="_blank" class="text-dark text-muted"><i class="fa fa-phone t-prim"></i> {{ company.phone }}</a>
+                                </li>
+                                {% if company.website %}
+                                    <li class="col">
+                                        <a href="http://{{ company.website }}" target = "_blank" class="text-dark text-muted"><i class="fa fa-globe t-prim"></i> {{ company.website }}</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="my-3">
+                            <a href="#jobs" class="btn btn-sm btn-brand prim text-light">Posted Jobs: {{ company.jobs | length }}</a>
+                        </div>
+                   </div>
+                    
+                </div>
+
+            </div>
+            <div id="jobs" class="col" >
+                <div class="bg-white p-3 border">
+                    <h3>Posted Jobs: <span class="text-muted">{{ company.jobs | length or 'No Posted Jobs Yet.' }}</span></h3>
+                    {% for job in company.jobs %}
+                        <div class="d-flex rad-3 border my-3 p-3 align-items-end">
+                            <div>
+                                <p class="m-0 h3">
+                                    {{ job.title }}
+                                </p>
+                                <p class="text-muted mb-2">
+                                    {{ job.category }}
+                                </p>
+                                <p class=" m-0">
+                                    {% if job.salary %}
+                                        <span><i class="fa fa-money t-prim"></i> KSh. {{ job.salary | numberFormat}}</span>
+                                    {% else %}
+                                        <span><i class="fa fa-money t-prim"></i> KSh. Not Specified</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <a href="{{ url_for('jobs.profile', job_id=job.id) }}" class="btn btn-sm btn-brand prim text-light ms-auto">{{ job.type }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section> -->
+
+<hr style="height: 4px;">
+
+{% endblock %}
+{% block script %}{% endblock %}

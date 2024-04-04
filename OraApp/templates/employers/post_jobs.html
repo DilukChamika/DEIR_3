@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+ 
+
+{% block container %}
+
+
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>{{ h }}</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Ls widget -->
+          <div class="ls-widget">
+            <div class="tabs-box">
+              <div class="widget-title">
+                <h4>{{ h }}</h4>
+              </div>
+
+              <div class="widget-content">
+
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12">
+                        <form class="default-form" action="" id="generate-description-form">
+                            <!-- Add a hidden input field to identify this form -->
+                            <input type="hidden" name="generate_description_form" value="1">
+                            <label>Generate a Job Description for your Job </label>
+                            <br>
+                                <button class="btn btn-primary" id="generate-description" disabled="true">Generate Description</button>
+                            <br><br>
+                            <div class="form-control">
+                                <!-- Replace the canvas with a <div> tag for displaying the generated text -->
+                                <div id="generated-description" class="generated-text"></div>
+                                <p id="generated-hashtags" style="display: inline-block; margin-right: 5px; background-color: #ADD8E6; color: #000; padding: 2px 6px; border-radius: 3px;">
+                                    <!-- Hashtags will be dynamically added here -->
+                                </p>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+                <br><br>
+
+                <form class="default-form" method="POST">
+                    {{form.hidden_tag()}}
+                    
+                  <div class="row">
+                    <!-- Input -->
+                    <div class="form-group col-lg-12 col-md-12">
+                      <label>{{form.title.label(class="form-control-label")}}</label>
+                      {% if form.title.errors %}
+                            {{form.title(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.title(class="form-control")}}
+                        {% endif %}
+                    </div>
+
+                    <!-- About Company -->
+                    <div class="form-group col-lg-12 col-md-12">
+                      <label>{{ form.description.label(class="form-control-label") }}</label>
+                      {% if form.description.errors %}
+                            {{form.description(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.description(class="form-control")}}
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Input -->
+                    <div class="form-group col-lg-6 col-md-12">
+                      <label>{{form.category.label(class="form-control-label")}}</label>
+                      {% if form.category.errors %}
+                            {{form.category(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.category.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.category(class="form-control")}}
+                        {% endif %}
+                    </div>
+                    
+
+                    
+                    <!-- Input -->
+                    <div class="form-group col-lg-6 col-md-12">
+                      <label>{{form.type.label(class="form-control-label")}}</label>
+                      {% if form.type.errors %}
+                            {{form.type(class="form-control form-select is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.type.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.type(class="form-control form-select")}}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label>{{form.salary.label(class="form-control-label")}}</label>
+                        {% if form.salary.errors %}
+                            {{form.salary(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.salary.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.salary(class="form-control")}}
+                        {% endif %}
+                      </div>
+                    <!-- Add the following HTML code inside your form -->
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="num_questions">Number of Questions</label>
+                        <input type="number" class="form-control" id="num_questions" name="num_questions" min="1" required>
+                    </div>
+                    
+                    <div id="question-inputs"></div> <!-- This div will contain dynamically generated question input fields -->
+
+
+                    <!-- Input -->
+                    <div class="form-group col-lg-12 col-md-12 text-right">
+                        {{form.submit(class="theme-btn btn-style-one")}}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+{% endblock %}
+{% block script %} 
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+        var titleInput = document.getElementsByName('title')[0];
+        var categoryInput = document.getElementsByName('category')[0];
+        var generateButton = document.getElementById('generate-description');
+        var generatedDescriptionDiv = document.getElementById('generated-description');
+        var hashtagsDiv = document.getElementById('generated-hashtags');
+
+        function updateGenerateButton() {
+            if (titleInput.value && categoryInput.value) {
+                generateButton.disabled = false;
+            } else {
+                generateButton.disabled = true;
+            }
+        }
+
+        titleInput.addEventListener('input', updateGenerateButton);
+        categoryInput.addEventListener('input', updateGenerateButton);
+
+        // Initially, disable the button if either title or category is empty
+        updateGenerateButton();
+
+        generateButton.addEventListener('click', function (event) {
+           event.preventDefault();  // Prevent default form submission behavior
+
+           fetch(`/employer/generate_description?job_title=${titleInput.value}&category=${categoryInput.value}`)
+               .then(response => {
+                   if (!response.ok) {
+                       throw new Error(`HTTP error! Status: ${response.status}`);
+                   }
+                   return response.json();
+               })
+               .then(data => {
+                   // Set the generated text in the <div> tag
+                   generatedDescriptionDiv.textContent = data.description;
+                    
+                   // Clear previous hashtags
+                   hashtagsDiv.textContent = data.hashtags;
+
+                   
+                   console.log("Hashtags:", data.hashtags);
+               })
+               .catch(error => console.error("Error fetching data:", error));
+       });
+
+    });
+
+
+    // UPDATED
+    document.addEventListener('DOMContentLoaded', function () {
+            var numQuestionsInput = document.getElementById('num_questions');
+            var questionInputsContainer = document.getElementById('question-inputs');
+
+            numQuestionsInput.addEventListener('input', function () {
+                var numQuestions = parseInt(numQuestionsInput.value);
+                questionInputsContainer.innerHTML = ''; // Clear existing inputs
+
+                for (var i = 0; i < numQuestions; i++) {
+                    var inputGroup = document.createElement('div');
+                    inputGroup.classList.add('form-group');
+
+                    var label = document.createElement('label');
+                    label.textContent = 'Question ' + (i + 1);
+                    inputGroup.appendChild(label);
+
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.classList.add('form-control');
+                    input.name = 'question_' + i; // Assign unique name for each question
+                    input.required = true;
+
+                    inputGroup.appendChild(input);
+                    questionInputsContainer.appendChild(inputGroup);
+                }
+            });
+        });
+</script>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+
+<section class="job-detail-section style-three bg-white">
+    <!-- Upper Box -->
+    <div class="upper-box">
+      <div class="auto-container">
+        <!-- Job Block -->
+        <div class="job-block-seven style-three">
+          <div class="inner-box">
+            <div class="content">
+                {% if job.company %}
+                <a href="{{ url_for('employer.profile', company_id=job.company.id) }}">
+                <span class="company-logo"><img src="{{ url_for('static', filename='employer/logo/' + job.company.logo) }}" alt=""></span>
+                </a>
+                <h4>{{ job.title.capitalize() }}</h4>
+                <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> {{ job.category }}</li>
+                    <li><span class="icon flaticon-map-locator"></span>{{ job.company.location }}</li>
+                    <li><span class="icon flaticon-clock-3"></span>{{ job.date_posted.strftime("%d %b, %Y") }}</li>
+                    <li><span class="icon flaticon-money"></span>
+                        {% if job.salary %}
+                            USD.{{ job.salary | numberFormat}}
+                        {% else %}
+                            USD. Not Specified
+                        {% endif %}
+                    
+                    </li>
+                </ul>
+                <ul class="job-other-info">
+                    <li class="privacy">{{ job.type }}</li>
+                    <!-- <li class="privacy">Private</li> -->
+                    <!-- <li class="required">Urgent</li> -->
+                </ul>
+                    
+
+                {% else %}
+                    <!-- Handle the case where job.company is None -->
+                    <p>No company information available</p>
+                {% endif %}
+              
+            </div>
+
+            <div class="btn-box">
+
+                {% if current_user.is_authenticated and current_user.applicants and job in current_user.applicants.applied_jobs %}
+                    <a href="#" class="theme-btn btn-style-one disabled">Applied <i class="fa fa-check-square-o"></i></a>
+                        {% if query.filter_by(applicant_id=current_user.applicants.id).first()[0] %}
+                            <span class="text-success ms-2">Shortlisted</span>
+                        {% else %}
+                            <span class="text-warning ms-2">Pending</span>
+                        {% endif %}
+                {% else %}
+                        <a href="{{ url_for('applicant.apply_for_job', job_id=job.id) }}" class="theme-btn btn-style-one">Send Application</a>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-detail-outer">
+      <div class="auto-container">
+        <div class="row">
+          <div class="content-column col-lg-8 offset-2 col-md-12 col-sm-12">
+            <div class="job-overview-two">
+              <h4>Job Description</h4>
+              <ul>
+                <li>
+                  <i class="icon icon-calendar"></i>
+                  <h5>Date Posted:</h5>
+                  <span>{{ job.date_posted.strftime("%d %b, %Y") }}</span>
+                </li>
+                <li>
+                  <i class="icon icon-location"></i>
+                  <h5>Location:</h5>
+                  <span> {{ job.company.location }}</span>
+                </li>
+                <li>
+                  <i class="icon icon-user-2"></i>
+                  <h5>Job Title:</h5>
+                  <span>{{ job.title }}</span>
+                </li>
+                <li>
+                  <i class="icon icon-clock"></i>
+                  <h5>Type:</h5>
+                  <span>{{ job.type }}</span>
+                </li>
+                <li>
+                  <i class="icon icon-salary"></i>
+                  <h5>Salary:</h5>
+                  <span>
+                    {% if job.salary %}
+                        USD. {{ job.salary | numberFormat}}
+                    {% else %}
+                        USD. Not Specified
+                    {% endif %}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="job-detail">
+              <h4>Job Description</h4>
+              <p>{{ job.description }}</p>
+              
+            </div>
+
+          
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="height: 4px;">
+
+{% endblock %}
+{% block script %}{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section class="pricing-section">
+    <div class="auto-container">
+        <div class="sec-title text-center">
+        <h2>Interview Questions</h2>
+        </div>
+
+
+        <div class="pricing-tabs tabs-box wow fadeInUp">
+            <div class="tabs-content">
+                <div class="tab active-tab" id="monthly">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2"></div>
+                            <div class="pricing-table col-lg-8 col-md-8 col-sm-12">
+                                <div class="inner-box">
+
+                                    <!-- Form to choose interview questions -->
+                                    <form method="post"
+                                        action="{{ url_for('employer.send_interview_questions', job_id=job.id, applicant_id=applicant.user.id) }}">
+                                        
+                                                    <h5 class="mb-3">Choose Selection Criteria:</h5>
+
+                                                    <!-- Question 1 -->
+                                                    <div class="mb-3">
+                                                        <label for="question1" class="form-label">Question 1</label>
+                                                        <textarea class="form-control" id="question1" name="question1" rows="3" required></textarea>
+                                                    </div>
+
+                                                    <!-- Question 2 -->
+                                                    <div class="mb-3">
+                                                        <label for="question2" class="form-label">Question 2</label>
+                                                        <textarea class="form-control" id="question2" name="question2" rows="3" required></textarea>
+                                                    </div>
+
+                                                    <button type="submit" class="theme-btn btn-style-one">Send Selection Criteria</button>
+                                                
+                                                <br><br><br>
+                                           
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

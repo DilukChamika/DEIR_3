@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#F4F2DE">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- chartJs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- favicon -->
+    <link rel="mask-icon" href="{{url_for('static', filename='img/oracom.png')}}">
+    <link rel="icon" href="{{url_for('static', filename='img/oracom.png')}}" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://use.fontawesome.com/4c109c920e.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>{{ title }}</title>
+
+    <style>
+        .password-toggle {
+          position: relative;
+          display: inline-block;
+        }
+        .password-toggle i {
+          position: absolute;
+          right: 5px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+        }
+      </style>
+
+
+
+</head>
+
+<body  data-anm=".anm" >
+    {% if current_user.is_authenticated and current_user.applicants %}
+    <div class="page-wrapper dashboard">
+    {% elif current_user.is_authenticated and current_user.employers %}
+    <div class="page-wrapper dashboard">
+    {% else %}
+    <div class="page-wrapper">
+    {% endif %}
+    
+
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <span class="header-span"></span>
+
+    
+
+                {% if current_user.is_authenticated and current_user.applicants %}
+                    {% block logged_applicant %}
+
+                    <header class="main-header">
+                   
+                    <div class="container-fluid">
+
+                        <!-- Main box -->
+                        <div class="main-box">
+                                    
+                                <!--Nav Outer -->
+                                <div class="nav-outer">
+                                    <div class="logo-box">
+                                        <div class="logo"><a href="{{url_for('main.home')}}"><img src="{{url_for('static', filename='img/oracom.png')}}" alt="" title="" width="120px" ></a></div>
+                                    </div>
+
+                                    <nav class="nav main-menu">
+                                        <ul class="navigation" id="navbar">
+                                            <li class=" {% if request.path == '/applicant/account' %}current{% endif %} ">
+                                                <a href="{{url_for('main.home')}}"> <span>Home</span> </a>
+                                            </li>
+                                            <li class=" {% if request.path == '/applicant/settings' %}current{% endif %}">
+                                                <a href="{{url_for('applicant.settings')}}"> <span>My Account</span> </a>
+                                            </li>
+                                            <li class="dropdown {% if request.path in ['/about-us', '/about-us-ourstory', '/our-vision-and-mission', '/our-team', '/blog', '/donate', '/faq' ,'/contact-us' ] %}current{% endif %}">
+                                                <span><a href="{{url_for('main.about')}}" style="color: inherit; text-decoration: none;">About Us</a></span>
+                                                <ul>
+                                                <li class=" {% if request.path == '/about-us-ourstory' %}current{% endif %} "><a href="{{url_for('main.aboutourstory')}}">Our Story</a></li>
+                                                <li class=" {% if request.path == '/our-vision-and-mission' %}current{% endif %} "><a href="{{url_for('main.ourvnm')}}">Our Mission and Vision</a></li>
+                                                <li class=" {% if request.path == '/our-team' %}current{% endif %} "><a href="{{url_for('main.ourteam')}}">Our Team</a></li>
+                                                <li class=" {% if request.path == '/blog' %}current{% endif %} "><a href="{{url_for('main.blog')}}">Blog</a></li>
+                                                <li class=" {% if request.path == '/donate' %}current{% endif %} "><a href="{{url_for('main.donate')}}">Support Our Mission: Donate</a></li>
+                                                <li class=" {% if request.path == '/faq' %}current{% endif %} "><a href="{{url_for('main.faq')}}">FAQ</a></li>
+                                                <li class=" {% if request.path == '/contact-us' %}current{% endif %} "><a href="{{url_for('main.contactus')}}">Contact Us</a></li>
+                                                </ul>
+                                            </li>  
+                                            <li class=" {% if request.path == '/company/list/' %}current{% endif %} ">
+                                                <a href="{{url_for('employer.company_list')}}">Employers</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/candidates' %}current{% endif %} ">
+                                                <a href="{{url_for('main.candidates')}}">Candidates</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/jobs/list/' %}current{% endif %} ">
+                                                <a href="{{url_for('jobs.job_list')}}">Find Jobs</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/packages' %}current{% endif %} ">
+                                                <a href="{{url_for('main.packages')}}">Packages</a>
+                                            </li> 
+                                            <!-- <li class=" {% if request.path == '/jobs/list/' %}current{% endif %}">
+                                                <a class="" href="{{url_for('jobs.job_list')}}">Jobs</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/applicant/jobs-applied' %}current{% endif %}">
+                                                <a class="nav-link ps-sm-auto ps-2" href="{{url_for('applicant.jobs_applied')}}">Jobs Applied</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/company/list/' %}current{% endif %}">
+                                                <a class="nav-link ps-sm-auto ps-2" href="{{url_for('employer.company_list')}}">Companies</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a class="nav-link ps-sm-auto ps-2 d-block d-sm-none" href="{{url_for('applicant.notifications')}}">Notifications</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link ps-sm-auto ps-2 d-block d-sm-none" href="{{url_for('applicant.settings')}}">Settings</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a class="text-dark ms-3 d-none d-sm-block" href="{{url_for('applicant.notifications')}}">
+                                                    <i class="fa fa-bell-o"></i> Notifications
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="text-dark d-none d-sm-block" href="{{url_for('applicant.settings')}}">
+                                                    <i class="fa fa-wrench"></i> Setting
+                                                </a>
+                                            </li>     -->
+                                            <!-- <li>
+                                                <a class="d-block btn btn-sm btn-brand peach text-light ms-md-3" href="{{url_for('main.logout')}}">Logout <i class="fa fa-sign-out"></i></a>
+                                            </li> -->
+
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                                <div class="outer-box">
+
+                                    <!-- <button class="menu-btn">
+                                    <span class="count">1</span>
+                                    <span class="icon la la-heart-o"></span>
+                                    </button>
+                        
+                                    <button class="menu-btn">
+                                    <span class="icon la la-bell"></span>
+                                    </button> -->
+                        
+                                    <!-- Dashboard Option -->
+                                    <div class="dropdown dashboard-option">
+                                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                                            <img src="{{ url_for('static', filename='applicant/image/' + user.image) }}" alt="avatar" class="thumb">
+                                            <span class="name">{{ user.f_name }} {{ user.l_name }}</span>
+                                        </a>
+                                    
+                                        <ul class="dropdown-menu">
+                                            <li class=" {% if request.path == '/applicant/account' %}active{% endif %}"><a href="{{url_for('applicant.applicant_account')}}"> <i class="la la-home"></i> Dashboard</a></li>
+                                            <li class=" {% if request.path == '/applicant/settings' %}active{% endif %}"><a href="{{url_for('applicant.settings')}}"><i class="la la-user-tie"></i>My Profile</a></li>
+                                            <li class=" {% if request.path == '/applicant/my-resume/' %}active{% endif %}"><a href="{{url_for('applicant.my_resume')}}"><i class="la la-file-invoice"></i>My Resume</a></li>
+                                            <li class=" {% if request.path == '/applicant/jobs-applied' %}active{% endif %}"><a href="{{url_for('applicant.jobs_applied')}}"><i class="la la-briefcase"></i>My Applied</a></li>
+                                            <li class=" {% if request.path == '/applicant/shortlisted-jobs' %}active{% endif %}"><a href="{{url_for('applicant.shortlisted_jobs')}}"><i class="la la-bookmark-o"></i>Shortlisted Jobs</a></li>
+                                            <li class=" {% if request.path == '/applicant/following-employers' %}active{% endif %}"><a href="{{url_for('applicant.following_emp')}}"><i class="las la-user-friends"></i>Following Employers</a></li>
+                                            <li class=" {% if request.path == '/applicant/alert_applicant' %}active{% endif %} "><a href="{{url_for('applicant.alert_applicant')}}"><i class="la la-bell"></i>Job Alerts</a></li>
+                                            <li class=" {% if request.path == '/applicant/messages' %}active{% endif %}"><a href="{{url_for('applicant.messages')}}"><i class="las la-envelope"></i>Messages</a></li> 
+                                            <li class=" {% if request.path == '/applicant/meetings' %}active{% endif %}"><a href="{{url_for('applicant.meetings')}}"><i class="las la-video"></i>Meetings</a></li>   
+                                            <li class=" {% if request.path == '/applicant/change-password/' %}active{% endif %}"><a href="{{url_for('applicant.change_password')}}"><i class="la la-lock"></i>Change Password</a></li>
+                                            <li><a href="{{url_for('main.logout')}}"><i class="la la-sign-out"></i>Logout</a></li>
+                                            <li class=" {% if request.path == '/applicant/delete-profile' %}active{% endif %}"><a href="{{url_for('applicant.delete_profile')}}"><i class="la la-trash"></i>Delete Profile</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <!-- <a href="{{url_for('employer.post_jobs')}}" class="btn-style-one">Job Post</a> -->
+                                </div>
+
+                        </div>
+                        
+                        <!-- Mobile Header -->
+                        <div class="mobile-header">
+                            <div class="logo"><a href="{{url_for('main.home')}}"><img src="{{url_for('static', filename='img/oracom.png')}}" alt="LOGO" title=""></a></div>
+
+                            <!--Nav Box-->
+                            <div class="nav-outer clearfix">
+
+                            <div class="outer-box">
+                                <!-- Login/Register -->
+                                <!-- <div class="login-box">
+                                <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
+                                </div> -->
+
+                                <button id="toggle-user-sidebar"><img src="{{ url_for('static', filename='applicant/image/' + user.image) }}" alt="avatar" class="thumb"></button>
+                                <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
+                            </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Mobile Nav -->
+                        <div id="nav-mobile"></div>
+
+                    </div>
+
+                    </header>
+
+                    {% include 'applicants/sidebar.html' %}
+
+                    {% endblock %}
+
+
+                {% elif current_user.is_authenticated and current_user.employers %}
+                    {% block logged_employer %}
+
+                    <header class="main-header">
+
+                    <div class="container-fluid">
+
+                        <!-- Main box -->
+                        <div class="main-box">
+                                    
+                                <!--Nav Outer -->
+                                <div class="nav-outer">
+                                    <div class="logo-box">
+                                        <div class="logo"><a href="{{url_for('main.home')}}"><img src="{{url_for('static', filename='img/oracom.png')}}" alt="" title="" width="120px" ></a></div>
+                                    </div>
+
+                                    <nav class="nav main-menu">
+                                        <ul class="navigation" id="navbar">
+                                            <li class=" {% if request.path == '/employer/account/' %}current{% endif %} ">
+                                                <a href="{{url_for('main.home')}}"> <span>Home</span> </a>
+                                            </li>
+                                            <li class=" {% if request.path == '/employer/settings/' %}current{% endif %}">
+                                                <a href="{{url_for('employer.settings')}}"> <span>My Account</span> </a>
+                                            </li>
+                                            <li class="dropdown {% if request.path in ['/about-us', '/about-us-ourstory', '/our-vision-and-mission', '/our-team', '/blog', '/donate', '/faq' ,'/contact-us' ] %}current{% endif %}">
+                                                <span><a href="{{url_for('main.about')}}" style="color: inherit; text-decoration: none;">About Us</a></span>
+                                                <ul>
+                                                <li class=" {% if request.path == '/about-us-ourstory' %}current{% endif %} "><a href="{{url_for('main.aboutourstory')}}">Our Story</a></li>
+                                                <li class=" {% if request.path == '/our-vision-and-mission' %}current{% endif %} "><a href="{{url_for('main.ourvnm')}}">Our Mission and Vision</a></li>
+                                                <li class=" {% if request.path == '/our-team' %}current{% endif %} "><a href="{{url_for('main.ourteam')}}">Our Team</a></li>
+                                                <li class=" {% if request.path == '/blog' %}current{% endif %} "><a href="{{url_for('main.blog')}}">Blog</a></li>
+                                                <li class=" {% if request.path == '/donate' %}current{% endif %} "><a href="{{url_for('main.donate')}}">Support Our Mission: Donate</a></li>
+                                                <li class=" {% if request.path == '/faq' %}current{% endif %} "><a href="{{url_for('main.faq')}}">FAQ</a></li>
+                                                <li class=" {% if request.path == '/contact-us' %}current{% endif %} "><a href="{{url_for('main.contactus')}}">Contact Us</a></li>
+                                                </ul>
+                                            </li>  
+                                            <li class=" {% if request.path == '/company/list/' %}current{% endif %} ">
+                                                <a href="{{url_for('employer.company_list')}}">Employers</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/candidates' %}current{% endif %} ">
+                                                <a href="{{url_for('main.candidates')}}">Candidates</a>
+                                            </li>
+                                            <li class=" {% if request.path in ['/jobs/list/','/jobs/categories/','/jobs/'] %}current{% endif %} ">
+                                                <a href="{{url_for('jobs.job_list')}}">Find Jobs</a>
+                                            </li>
+                                            <li class=" {% if request.path == '/packages' %}current{% endif %} ">
+                                                <a href="{{url_for('main.packages')}}">Packages</a>
+                                            </li> 
+                                      
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                                <div class="outer-box">
+
+                                    <!-- <button class="menu-btn">
+                                    <span class="count">1</span>
+                                    <span class="icon la la-heart-o"></span>
+                                    </button>
+                        
+                                    <button class="menu-btn">
+                                    <span class="icon la la-bell"></span>
+                                    </button> -->
+                        
+                                    <!-- Dashboard Option -->
+                                    <div class="dropdown dashboard-option">
+                                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                                            <img src="{{ url_for('static', filename='employer/logo/' + user.logo) }}" alt="avatar" class="thumb">
+                                            <span class="name">{{user.name}}</span>
+                                          </a>
+                                    
+                                        <ul class="dropdown-menu">
+                                            <li class=" {% if request.path == '/employer/account/' %}active{% endif %} "><a href="{{url_for('employer.employer_account')}}"> <i class="la la-home"></i> Dashboard</a></li>
+                                            <li class=" {% if request.path == '/employer/settings/' %}active{% endif %} "><a href="{{url_for('employer.settings')}}"><i class="la la-user-tie"></i>My Profile</a></li>
+                                            <li class=" {% if request.path == '/employer/posted-jobs' %}active{% endif %} "><a href="{{url_for('employer.posted_jobs')}}"><i class="la la-briefcase"></i>My Jobs</a></li>
+                                            <li class=" {% if request.path == '/employer/post-jobs/' %}active{% endif %} "><a href="{{url_for('employer.post_jobs')}}"><i class="la la-paper-plane"></i>Post Jobs</a></li>
+                                            <li class=" {% if request.path == '/employer/applicants/' %}active{% endif %} "><a href="{{url_for('employer.applicants')}}"><i class="la la-bookmark-o"></i>Applicants Jobs</a></li>
+                                            <li class=" {% if request.path == '/employer/applicants/shortlisted' %}active{% endif %} "><a href="{{url_for('employer.listed_applicants')}}"><i class="las la-user-friends"></i>Shortlist Candidate</a></li>
+                                            <li class=" {% if request.path == '/employers/notifications/' %}active{% endif %} "><a href="{{url_for('employer.notifications')}}"><i class="la la-bell"></i>Alerts & Transcript</a></li>
+                                            <li class=" {% if request.path == '/employers/messages' %}active{% endif %} "><a href="{{url_for('employer.messages')}}"><i class="las la-envelope"></i>Messages</a></li> 
+                                            <li class=" {% if request.path == '/employers/meetings' %}active{% endif %} "><a href="{{url_for('employer.meetings')}}"><i class="las la-video"></i>Meetings</a></li>   
+                                            <li class=" {% if request.path == '/employers/change-password/' %}active{% endif %} "><a href="{{url_for('employer.change_password')}}"><i class="la la-lock"></i>Change Password</a></li>
+                                            <li><a href="{{url_for('main.logout')}}"><i class="la la-sign-out"></i>Logout</a></li>
+                                            <li class=" {% if request.path == '/employer/delete-profile' %}active{% endif %} "><a href="{{url_for('employer.employer_account_delete')}}"><i class="la la-trash"></i>Delete Profile</a></li>
+                                        </ul>
+                                    </div>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <a href="{{url_for('employer.post_jobs')}}" class="btn-style-one">Job Post</a>
+                                </div>
+
+                        </div>
+                        
+                        <!-- Mobile Header -->
+                        <div class="mobile-header">
+                            <div class="logo"><a href="{{url_for('main.home')}}"><img src="{{url_for('static', filename='img/oracom.png')}}" alt="LOGO" title=""></a></div>
+
+                            <!--Nav Box-->
+                            <div class="nav-outer clearfix">
+
+                            <div class="outer-box">
+                                <!-- Login/Register -->
+                                <!-- <div class="login-box">
+                                <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
+                                </div> -->
+
+                                <button id="toggle-user-sidebar"><img src="{{ url_for('static', filename='employer/logo/' + user.logo) }}" alt="avatar" class="thumb"></button>
+                                <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
+                            </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Mobile Nav -->
+                        <div id="nav-mobile"></div>
+
+                    </div>
+
+                    </header>
+
+                    {% include 'employers/sidebar.html' %}
+                    
+                    {% endblock %}
+                {% else %}
+
+                    {% block logged_out %}
+
+                    <header class="main-header">
+
+                    <div class="container-fluid">
+                        <!-- Main box -->
+                        <div class="main-box">
+                        
+                            <!--Nav Outer -->
+                            <div class="nav-outer">
+                                <div class="logo-box">
+                                    <div class="logo"><a href="{{url_for('main.home')}}"><img src="{{url_for('static', filename='img/oracom.png')}}" alt="" title="" width="120px" ></a></div>
+                                </div>
+
+                                <nav class="nav main-menu">
+                                    <ul class="navigation" id="navbar">
+                            
+                                        <li class=" {% if request.path == '/' %}current{% endif %} ">
+                                            <a href="{{url_for('main.home')}}"> <span>Home</span> </a>
+                                        </li>
+                                        <li class="dropdown {% if request.path in ['/about-us', '/about-us-ourstory', '/our-vision-and-mission', '/our-team', '/blog', '/donate', '/faq' ,'/contact-us' ] %}current{% endif %}">
+                                            <span><a href="{{url_for('main.about')}}" style="color: inherit; text-decoration: none;">About Us</a></span>
+                                            <ul>
+                                            <li class=" {% if request.path == '/about-us-ourstory' %}current{% endif %} "><a href="{{url_for('main.aboutourstory')}}">Our Story</a></li>
+                                            <li class=" {% if request.path == '/our-vision-and-mission' %}current{% endif %} "><a href="{{url_for('main.ourvnm')}}">Our Mission and Vision</a></li>
+                                            <li class=" {% if request.path == '/our-team' %}current{% endif %} "><a href="{{url_for('main.ourteam')}}">Our Team</a></li>
+                                            <li class=" {% if request.path == '/blog' %}current{% endif %} "><a href="{{url_for('main.blog')}}">Blog</a></li>
+                                            <li class=" {% if request.path == '/donate' %}current{% endif %} "><a href="{{url_for('main.donate')}}">Support Our Mission: Donate</a></li>
+                                            <li class=" {% if request.path == '/faq' %}current{% endif %} "><a href="{{url_for('main.faq')}}">FAQ</a></li>
+                                            <li class=" {% if request.path == '/contact-us' %}current{% endif %} "><a href="{{url_for('main.contactus')}}">Contact Us</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class=" {% if request.path == '/company/list/' %}current{% endif %} ">
+                                            <a href="{{url_for('employer.company_list')}}">Employers</a>
+                                        </li>
+                                        <li class=" {% if request.path == '/candidates' %}current{% endif %} ">
+                                            <a href="{{url_for('main.candidates')}}">Candidates</a>
+                                        </li>
+                                        <li class=" {% if request.path == '/jobs/list/' %}current{% endif %} ">
+                                            <a href="{{url_for('jobs.job_list')}}">Find Jobs</a>
+                                        </li>
+                                        <li class=" {% if request.path == '/packages' %}current{% endif %} ">
+                                            <a href="{{url_for('main.packages')}}">Packages</a>
+                                        </li>
+                                                        
+                                                        
+                                        <li class="dropdown {% if request.path in ['/employer/login/', '/applicant/login' , '/admin/login'] %}current{% endif %}">
+                                            <!-- <a class="nav-link ps-sm-auto ps-2 dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Login</a> -->
+                                            <span>Login</span>
+                                            <ul>
+                                                <li class=" {% if request.path == '/employer/login/' %}current{% endif %} "><a href="{{url_for('employer.employer_login')}}">Employer</a></li>
+                                                <li class=" {% if request.path == '/applicant/login' %}current{% endif %} "><a href="{{url_for('applicant.applicant_login')}}">Applicant</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li class=" {% if request.path == '/admin/login' %}current{% endif %} "><a href="{{url_for('admin.admin_login')}}">Admin</a></li>
+                                            </ul>
+                                        </li>
+                                                    
+                                        <li class="dropdown {% if request.path in ['/employer/signup/', '/applicant/signup'] %}current{% endif %}">
+                                            <!-- <a class="dropdown-toggle d-block btn btn-sm btn-brand peach text-light ms-md-3" href="#"
+                                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Register</a> -->
+                                            <span>Register</span>
+                                            <ul>
+                                                <li class=" {% if request.path == '/employer/signup/' %}current{% endif %} "><a  href="{{url_for('employer.employer_signup')}}">Employer</a></li>
+                                                <li class=" {% if request.path == '/applicant/signup' %}current{% endif %} "><a  href="{{url_for('applicant.applicant_signup')}}">Applicant</a></li>
+                                            </ul>
+                                        </li>
+                                    
+                                    </ul>
+                                </nav>
+                            </div>
+                                                    
+
+                            <div class="outer-box">
+                                <div class="btn-box">   
+                                <!-- <a href="{{url_for('applicant.applicant_login')}}" class="theme-btn btn-style-three call-modal">Login/Register</a> -->
+                                <a href="{{url_for('employer.post_jobs')}}" class="theme-btn btn-style-one">Add Job</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Mobile Header -->
+                        <div class="mobile-header">
+                            <div class="logo"><a href="{{url_for('main.home')}}"><img src="{{url_for('static', filename='img/oracom.png')}}" alt="LOGO" title=""></a></div>
+
+                            <!--Nav Box-->
+                            <div class="nav-outer clearfix">
+
+                            <div class="outer-box">
+                                <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
+                            </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Mobile Nav -->
+                        <div id="nav-mobile"></div>
+
+
+                    </div>
+
+                    </header>
+
+                    {% endblock %}
+                {% endif %}
+
+
+
+        <div class="container p-0">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show d-flex align-items-center" role="alert">
+                            {{ message }}
+                            <button class="btn btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        </div>
+
+
+        {% block container %}{% endblock %}
+
+        <!-- footer -->
+        <footer class="main-footer">
+            <div class="auto-container" >
+                <div class="widgets-section wow fadeInUp">
+                    <div class="row">
+                        <div class="big-column col-xl-6 col-lg-6 col-md-12">
+                            <div class="footer-column about-widget">
+                                <div class="logo">
+                                    <a class="" href="{{url_for('main.home')}}">
+                                        <img src="{{url_for('static', filename='img/oracom.png')}}" alt="Oracom" width="120px">
+                                        <!-- <b>Ora<span class="t-prim">Jobs</span></b> -->
+                                    </a>
+                                </div> 
+                                <p class="phone-num"><span>Call us </span><a href="inquiry@istemco.com">0426 847 132</a></p>
+                                <p class="address">
+                                    Level 14, 839 Collins Street, Docklands VIC, 3008. <br><a href="mailto:inquiry@istemco.com" class="email">inquiry@istemco.com</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="big-column col-xl-6 col-lg-6 col-md-12">
+                            <div class="row">
+                                <div class="footer-column col-lg-4 col-md-4 col-sm-6">
+                                    <div class="footer-widget links-widget">
+                                        <ul class="list">
+                                            {% if current_user.is_authenticated and current_user.applicants %}
+                                                <li></li>
+                                                <li><a href="{{url_for('main.home')}}">Account</a></li>
+                                                <li><a href="{{url_for('jobs.job_list')}}">Jobs</a></li>
+                                                <li><a href="{{url_for('applicant.jobs_applied')}}">Jobs Applied</a></li>
+                                                <li><a href="{{url_for('employer.company_list')}}">Companies</a></li>
+                                                <li><a href="{{url_for('main.logout')}}">Logout</a></li>
+                                            {% elif current_user.is_authenticated and current_user.employers %}
+                                                <li></li>
+                                                <li><a href="{{url_for('main.home')}}">Account</a></li>
+                                                <li><a href="{{url_for('employer.posted_jobs')}}">Jobs Posted</a></li>
+                                                <li><a href="{{url_for('employer.applicants')}}">Applicants</a></li>
+                                                <li><a href="{{url_for('main.logout')}}">Logout</a></li>
+                                            {% else %}
+                                                <b>For Candidates</b><br><br>
+                                                <li><a href="{{url_for('jobs.job_list')}}">Browse Jobs</a></li>
+                                                <li><a href="{{url_for('employer.company_list')}}">Companies</a></li>
+                                                <li><a href="{{url_for('main.candidates')}}">Browse Candidates</a></li>
+                                                <!-- <li><a href="#">Candidate Dashboard</a></li> -->
+                                                <!-- <li><a href="{{url_for('employer.employer_login')}}">Employer</a></li> -->
+                                                <li><a href="{{url_for('applicant.applicant_login')}}">Applicant Login</a></li>
+                                                <!-- <li><a href="{{url_for('admin.admin_login')}}">Admin</a></li> -->
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="footer-column col-lg-4 col-md-4 col-sm-6">
+                                    <div class="footer-widget links-widget">
+                                        <ul class="list">
+                                            <b>For Employers</b><br><br>
+                                            <li><a href="{{url_for('employer.company_list')}}">All Employers</a></li>
+                                            <li><a href="{{url_for('employer.employer_account')}}">Employer Dashboard</a></li>
+                                            <li><a href="{{url_for('employer.post_jobs')}}">Submit Job</a></li>
+                                            <li><a href="{{url_for('main.packages')}}">Job Packages</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="footer-column col-lg-4 col-md-4 col-sm-6">
+                                    <div class="footer-widget links-widget">
+                                        <ul class="list">
+                                            <b>About Us</b><br><br>
+                                            <li><a href="{{url_for('main.about')}}">About Us</a></li>
+                                            <li><a href="{{url_for('main.privacypolicy')}}">Privacy Policy</a></li>
+                                            <li><a href="{{url_for('main.termsncond')}}">Terms and Conditions</a></li>
+                                            <li><a href="{{url_for('main.drp')}}">Data Retention Policy</a></li>
+                                            <li><a href="{{url_for('main.faq')}}">FAQ</a></li>
+                                            <li><a href="{{url_for('main.contactus')}}">Contact Us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <p align="justify">
+                            iSTEM Co. recognises the First Peoples of this nation and their ongoing connection to culture and country. We acknowledge First Nations Peoples as the Traditional Owners and Custodians of country throughout Australia. We honour and pay our respects to Elders past, present and emerging.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            <!--Bottom-->
+            <div class="footer-bottom">
+                <div class="auto-container">
+                <div class="outer-box">
+                    <div class="copyright-text">© 2021 <a href="#">Superio</a>. All Right Reserved.</div>
+                    <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
+
+        </footer>
+
+
+
+    </div>
+
+                    <!--Bootstrap5 JS -->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+                    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+                    crossorigin="anonymous"></script>
+                    <!-- custom js -->
+                    <!-- <script src="{{url_for('static', filename='js/main.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/utils.js')}}"></script> -->
+                    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/jquery-ui.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/chosen.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/jquery.fancybox.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/jquery.modal.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/mmenu.polyfills.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/mmenu.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/appear.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/anm.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/ScrollMagic.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/rellax.min.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/owl.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/wow.js')}}"></script>
+                    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+                    <script src="http://maps.google.com/maps/api/js?key=AIzaSyDaaCBm4FEmgKs5cfVrh3JYue3Chj1kJMw&#038;ver=5.2.4"></script>
+                    <script src="{{url_for('static', filename='js/map-script.js')}}"></script>
+                    {% block script %}
+                    <!-- <script src="{{url_for('static', filename='js/home.js')}}"></script> -->
+                    {% endblock %}
+
+
+
+</body>
+
+</html>

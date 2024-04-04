@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Edit Resume</h3>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Ls widget -->
+          <div class="ls-widget">
+            <div class="tabs-box">
+              <div class="widget-title">
+                <h4>My Resume</h4>
+              </div>
+
+              <div class="widget-content">
+
+                <div class="uploading-outer">
+                    <div class="prof-update">
+                        <div class="d-flex">
+                            <div class="profile-img-ctn">
+                              <a class="paper ms-auto text-dark " href="{{ url_for('static', filename='applicant/resume/' + user.resume) }}" target="_blank">
+                                <img src="{{ url_for('static', filename='img/paper.png') }}" width="200px">
+                              </a> 
+                                <!-- <iframe src="{{ url_for('static', filename='applicant/resume/' + user.resume) }}" alt="" width="120px"></iframe> -->
+                                <!-- <embed src="{{ url_for('static', filename='applicant/resume/' + user.resume) }}" type="application/pdf" width="100%" height="600px"> -->
+                            </div>
+                            <div class="ms-2">
+                                <p class="m-0 text-bold p-0">{{ user.l_name }} {{ user.f_name }}</p>
+                                <form class="default-form" method="POST" action="" enctype="multipart/form-data">
+                                  {{form.hidden_tag()}}
+                                    <div class="form-group form-file-group">
+                                      <label>{{form.resume.label(class="form-label")}}</label>
+                                            {{form.resume(class="form-control form-control-sm")}}
+                                            {% if form.resume.errors %}
+                                                {% for error in form.resume.errors %}
+                                                    <span class="text-danger">{{error}}</span><br>
+                                                {% endfor %}
+                                            {% else %}
+                                            {% endif %}
+                                    </div>
+                                    <div class="form-group col-lg-6 col-md-12">
+                                      {{form.submit(class="theme-btn btn-style-one")}}
+                                  </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+            
+              </div>
+            </div>
+          </div>
+
+  
+         
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}{% endblock %}

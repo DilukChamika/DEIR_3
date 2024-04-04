@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+
+
+{% block container %}
+
+<br>
+ <!-- Info Section -->
+<div class="login-section bg-light">
+    <div class="outer-box bg-white">
+      <!-- Login Form -->
+      <div class="login-form default-form">
+        <div class="form-inner">
+          <h3 align="center">Employer Login to DEIR</h3>
+          <!--Login Form-->
+          <form method="post" action="{{ url_for('employer.employer_login') }}">
+            {{form.hidden_tag()}}
+            <div class="form-group">
+                {{form.email.label(class="form-control-label")}}
+                <!-- input validation -->
+                {% if form.email.errors %}
+                {{form.email(class="form-control is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{form.email(class="form-control")}}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{form.password.label(class="form-control-label")}}
+                <!-- <input id="password-field" type="password" name="password" value="" placeholder="Password"> -->
+                {% if form.password.errors %}
+                    {{form.password(class="form-control is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="password-toggle" style="width: 100%;">
+                        {{ form.password(class="form-control") }}
+                        <i class="fas fa-eye" id="togglePassword"></i>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+              <div class="field-outer">
+                <div class="input-group checkboxes square">
+                  <!-- Checkbox -->
+                  {{form.remember(class="form-check-input")}}
+                  <!-- Checkbox label -->
+                  {{form.remember.label(class="form-check-label")}}
+                </div>
+                <a href="{{ url_for('employer.password_reset_request') }}" class="pwd">Forgot password?</a>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <!-- <button class="theme-btn btn-style-one" type="submit" name="log-in">Log In</button> -->
+              {{form.submit(class="theme-btn btn-style-one")}}
+            </div>
+          </form>
+
+          <div class="bottom-box">
+            <div class="text">Don't have an account? <a href="{{url_for('employer.employer_signup')}}">Signup</a></div>
+            <!-- <div class="divider"><span>or</span></div>
+            <div class="btn-box row">
+              <div class="col-lg-6 col-md-12">
+                <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log In via Facebook</a>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <!--End Login Form -->
+    </div>
+</div>
+  <!-- End Info Section -->
+
+    <!-- <section id="form-section" class="pb-5 bg-light">
+        <div class="container">
+            <div class="d-flex">
+                <div class="form-ctn mx-auto">
+                    <form class="bg-white px-4 py-5" method="POST" action="">
+                        {{form.hidden_tag()}}
+                        <div class="h-hr">
+                            <h4 class="h">Login</h4>
+                            <span class="hr"></span>
+                        </div>
+                        <div class="">
+                            <div class="form-group">
+                                <div class="field-ctn">
+                                    {% if form.email.errors %}
+                                        {{form.email(class="form-control is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.email(class="form-control")}}
+                                    {% endif %}
+                                    {{form.email.label(class="form-control-label")}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="field-ctn">
+                                    {% if form.password.errors %}
+                                        {{form.password(class="form-control is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.password.errors %}
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.password(class="form-control")}}
+                                    {% endif %}
+                                    {{form.password.label(class="form-control-label")}}
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <div class="mb-4">
+                                    {{form.remember(class="form-check-input")}}
+                                    {{form.remember.label(class="form-check-label")}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            {{form.submit(class="btn btn-brand prim text-light d-inline px-4")}}
+                            <small class="text-muted">
+                                <a class="ms-3 t-prim" href="{{ url_for('employer.password_reset_request') }}">Forgot Password?</a>
+                            </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+      
+        togglePassword.addEventListener('click', function() {
+          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+          password.setAttribute('type', type);
+          this.classList.toggle('fa-eye-slash');
+        });
+      </script>
+
+{% endblock %}
+{% block script %}{% endblock %}

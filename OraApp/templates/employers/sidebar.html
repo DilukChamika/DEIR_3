@@ -1,0 +1,21 @@
+<!-- Employer Sidebar -->
+<div class="user-sidebar">
+
+    <div class="sidebar-inner">
+      <ul class="navigation">
+          <li class=" {% if request.path == '/employer/account/' %}active{% endif %} "><a href="{{url_for('employer.employer_account')}}"> <i class="la la-home"></i> Dashboard</a></li>
+          <li class=" {% if request.path == '/employer/settings/' %}active{% endif %} "><a href="{{url_for('employer.settings')}}"><i class="la la-user-tie"></i>My Profile</a></li>
+          <li class=" {% if request.path == '/employer/posted-jobs' %}active{% endif %} "><a href="{{url_for('employer.posted_jobs')}}"><i class="la la-briefcase"></i>My Jobs</a></li>
+          <li class=" {% if request.path == '/employer/post-jobs/' %}active{% endif %} "><a href="{{url_for('employer.post_jobs')}}"><i class="la la-paper-plane"></i>Post Jobs</a></li>
+          <li class=" {% if request.path == '/employer/applicants/' %}active{% endif %} "><a href="{{url_for('employer.applicants')}}"><i class="la la-bookmark-o"></i>Applicants Jobs</a></li>
+          <li class=" {% if request.path == '/employer/applicants/shortlisted' %}active{% endif %} "><a href="{{url_for('employer.listed_applicants')}}"><i class="las la-user-friends"></i>Shortlist Candidate</a></li>
+          <li class=" {% if request.path == '/employers/notifications/' %}active{% endif %} "><a href="{{url_for('employer.notifications')}}"><i class="la la-bell"></i>Alerts & Transcript</a></li>
+          <li class=" {% if request.path == '/employers/messages' %}active{% endif %} "><a href="{{url_for('employer.messages')}}"><i class="las la-envelope"></i>Messages</a></li> 
+          <li class=" {% if request.path == '/employers/meetings' %}active{% endif %} "><a href="{{url_for('employer.meetings')}}"><i class="las la-video"></i>Meetings</a></li>   
+          <li class=" {% if request.path == '/employers/change-password/' %}active{% endif %} "><a href="{{url_for('employer.change_password')}}"><i class="la la-lock"></i>Change Password</a></li>
+          <li><a href="{{url_for('main.logout')}}"><i class="la la-sign-out"></i>Logout</a></li>
+          <li class=" {% if request.path == '/employer/delete-profile' %}active{% endif %} "><a href="{{url_for('employer.employer_account_delete')}}"><i class="la la-trash"></i>Delete Profile</a></li>
+        </ul>
+    </div>
+  </div>
+  <!-- End User Sidebar -->

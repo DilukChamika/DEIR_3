@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+<section class="pricing-section">
+    <div class="auto-container">
+      <div class="sec-title text-center">
+        <h2>Zoom Meeting Details <i class="fa fa-video-camera"
+            aria-hidden="true"></i></h2>
+      </div>
+      <div class="pricing-tabs tabs-box wow fadeInUp">
+            <div class="tabs-content">
+
+          <div class="tab active-tab" id="monthly">
+            <div class="content">
+              <div class="row">
+                <!-- Pricing Table -->
+                <div class="col-lg-2 col-md-2"></div>
+                <div class="pricing-table col-lg-8 col-md-8 col-sm-12">
+                  <div class="inner-box">
+                    <!-- <div class="title">Basic</div>
+                    <div class="price">$1199 <span class="duration">/ Annual</span></div> -->
+                    <h5>Meeting Details for Applicant:<div class="title">{{ notification_details.recipient }}</div> </h5>
+                    <br>
+                    <div class="table-content">
+                        <p><b>Meeting URL:</b> {{ notification_details.meeting_url }}</p><br>
+                        <p><b>Meeting Time:</b> {{ notification_details.meeting_time }}</p><br>
+                        <p><b>Meeting Duration:</b> {{ notification_details.meeting_duration }} minutes</p><br>
+                        <p><b>Meeting Topic:</b> {{ notification_details.meeting_topic }}</p>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-2"></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+{% endblock %}

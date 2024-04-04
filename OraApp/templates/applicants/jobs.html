@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Applied Jobs</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Ls widget -->
+          <div class="ls-widget">
+            <div class="tabs-box">
+
+
+              <!-- <div class="widget-title">
+                <div class=" chosen-outer jobsearchbar">
+                  <span class="icon flaticon-search-3"></span>
+                  <input type="text" class="jobsearchbar" name="listing-search" placeholder="Search...">
+                </div>
+
+                <div class="chosen-outer">
+                  Sort: 
+                  <select class="chosen-select">
+                    <option>Default</option>
+                    <option>Newest</option>
+                    <option>Oldest</option>
+                  </select>
+                </div>
+              </div> -->
+
+              <br><br>
+             
+
+              <div class="widget-content">
+                <div class="table-outer">
+                  {% if jobs.items %}
+                  <table class="default-table manage-job-table">
+                    <thead>
+                      <tr>
+                        <th>Job Title</th>
+                        <th>Date Applied</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for job, date, status in jobs.items %}
+
+                        <div class="modal fade jobdelmodal" id="remove-job{{job.id}}" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content bg-c-white t-dark">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="">Remove Job from List?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <form action="{{ url_for('applicant.remove_job', job_id=job.id) }}" method="post">
+                                            <input type="submit" class="btn btn-sm btn-danger" value="Remove">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                      <tr>
+                        <td>
+                          <!-- Job Block -->
+                          <div class="job-block">
+                            <div class="inner-box">
+                              <div class="content">
+                                <span class="company-logo"><img src="{{ url_for('static', filename='employer/logo/' + job.company.logo) }}" alt=""></span>
+                                <h4><a href="{{ url_for('jobs.profile', job_id=job.id) }}">{{ job.title }}</a></h4>
+                                <ul class="job-info">
+                                  <li><span class="icon flaticon-briefcase"></span> {{ job.company.name.capitalize() }} </li>
+                                  <li><span class="icon flaticon-map-locator"></span> {{ job.company.location }} </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{{ date.strftime("%d %b, %Y") }}</td>
+                        <td class="status">
+                          {% if status %}
+                              <p class="text-success">Shortlisted</p>
+                          {% else %}
+                              <p class="text-warning">Pending</p>
+                          {% endif %}
+                        </td>
+                        <td>
+                          <div class="option-box">
+                            <ul class="option-list">
+                              <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                              <li><button data-text="Delete Aplication" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#remove-job{{job.id}}"><span class="la la-trash"></span></button></li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+
+                  
+                    </tbody>
+                  </table>
+                  {% else %}
+                  <div class="d-flex align-items-center">
+                    <p>Jobs Applied: <span class="text-muted">{{ jobs.total or 'No Application Found.' }}</span></p>
+                    <!-- <a href="{{ url_for('jobs.job_list') }}" class="btn btn-sm ms-auto btn-success my-2 text-light">Find More Jobs</a> -->
+                    
+                  </div>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+            {% if jobs.total > jobs.per_page %}
+                {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if jobs.page == page_num %}
+                            <a href="{{ url_for('applicant.jobs_applied', page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                        {% else %}
+                            <a href="{{ url_for('applicant.jobs_applied', page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                        {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    <section class="py-3 bg-light min-vh">
+        <div class="container ">
+            <h3 class="text-light prim my-3 p-3">Applications <i class="fa fa-send" aria-hidden="true"></i></h3>
+            <div class="row row-cols-1 g-2">
+                <div class="col">
+                    <div class="bg-white p-3 border">
+                        <div class="d-flex align-items-center">
+                            <h4>Jobs Applied: <span class="text-muted">{{ jobs.total or 'No Applications Sent.' }}</span></h4>
+                            <a href="{{ url_for('jobs.job_list') }}" class="btn btn-sm ms-auto btn-success my-2 text-light">Find More Jobs</a>
+                        </div>
+                        {% for job, date, status in jobs.items %}
+
+                            <div class="modal fade" id="remove-job{{job.id}}" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content bg-c-white t-dark">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="">Remove Job from List?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <form action="{{ url_for('applicant.remove_job', job_id=job.id) }}" method="post">
+                                                <input type="submit" class="btn btn-sm btn-danger" value="Remove">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex rad-3 border my-3 p-3 align-items-end">
+                                <div class="">
+                                    <a href="{{ url_for('jobs.profile', job_id=job.id) }}" class="m-0 h3 text-dark">
+                                        {{ job.title }}
+                                    </a>
+                                    <p class="text-muted">
+                                        {% if job.company %}
+                                        {{ job.company.name.capitalize() }} | <i class="fa fa-map-marker t-prim"></i> {{ job.company.location }}
+                                        {% else %}
+                                        No company information available
+                                        {% endif %}
+
+                                    </p>
+                                    <a href="{{ url_for('jobs.profile', job_id=job.id) }}" class="btn btn-brand prim text-light btn-sm">{{ job.type }}</a>
+                                    <small class=" ms-2">Applied {{ date.strftime("%d %b, %Y") }}</small>
+
+                                </div>
+                                <div class="ms-auto">
+                                    {% if status %}
+                                        <p class="text-success">Shortlisted</p>
+                                    {% else %}
+                                        <p class="text-warning">Pending</p>
+                                    {% endif %}
+                                    <a href="#" class="btn btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#remove-job{{job.id}}"><span class="d-sm-inline d-none">Remove</span> <i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>  
+            </div>
+            {% if jobs.total > jobs.per_page %}
+                {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if jobs.page == page_num %}
+                            <a href="{{ url_for('applicant.jobs_applied', page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                        {% else %}
+                            <a href="{{ url_for('applicant.jobs_applied', page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                        {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </section> -->
+
+{% endblock %}
+{% block script %}{% endblock %}

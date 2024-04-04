@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+    {% block container %}
+
+        {% if  current_user.applicants %}
+
+            <!-- Sidebar Backdrop -->
+            <div class="sidebar-backdrop"></div>
+
+            <!-- User Sidebar -->
+            <div class="user-sidebar">
+
+            <div class="sidebar-inner">
+                <ul class="navigation">
+                <li class="active"><a href="{{url_for('applicant.applicant_account')}}"> <i class="la la-home"></i> Dashboard</a></li>
+                <li><a href="{{url_for('applicant.settings')}}"><i class="la la-user-tie"></i>My Profile</a></li>
+                <li><a href=""><i class="la la-file-invoice"></i>My Resume</a></li>
+                <li><a href="{{url_for('applicant.jobs_applied')}}"><i class="la la-briefcase"></i>My Applied</a></li>
+                <li><a href="{{url_for('applicant.shortlisted_jobs')}}"><i class="la la-bookmark-o"></i>Shortlisted Jobs</a></li>
+                <li><a href=""><i class="las la-user-friends"></i>Following Employers</a></li>
+                <li><a href=""><i class="la la-bell"></i>Job Alerts</a></li>
+                <li><a href=""><i class="las la-envelope"></i>Messages</a></li> 
+                <li><a href=""><i class="las la-video"></i>Meetings</a></li>   
+                <li><a href=""><i class="la la-lock"></i>Change Password</a></li>
+                <li><a href="{{url_for('main.logout')}}"><i class="la la-sign-out"></i>Logout</a></li>
+                <li><a href=""><i class="la la-trash"></i>Delete Profile</a></li>
+                </ul>
+            </div>
+            </div>
+            <!-- End User Sidebar -->
+
+            <div class="user-dashboard">
+                <br><br><br><br>
+                <div class=" fullpageerrorbox  bg-light">
+                    {% block applicant_errorcontainer %}{% endblock %}
+                    <br>
+                    <a href="{{url_for('main.home')}}" class="btn theme-btn btn-style-one">Home Page</a>
+                </div>
+            </div>
+            <br><br><br><br>
+
+        {% elif current_user.employers %}
+
+            <!-- Sidebar Backdrop -->
+            <div class="sidebar-backdrop"></div>
+
+            <!-- User Sidebar -->
+            <div class="user-sidebar">
+
+            <div class="sidebar-inner">
+                <ul class="navigation">
+                    <li class="active"><a href="{{url_for('employer.employer_account')}}"> <i class="la la-home"></i> Dashboard</a></li>
+                    <li><a href="{{url_for('employer.settings')}}"><i class="la la-user-tie"></i>My Profile</a></li>
+                    <li><a href="{{url_for('employer.posted_jobs')}}"><i class="la la-briefcase"></i>My Jobs</a></li>
+                    <li><a href="{{url_for('employer.post_jobs')}}"><i class="la la-paper-plane"></i>Post Jobs</a></li>
+                    <li><a href=""><i class="la la-bookmark-o"></i>Applicants Jobs</a></li>
+                    <li><a href=""><i class="las la-user-friends"></i>Shortlist Candidate</a></li>
+                    <li><a href=""><i class="la la-bell"></i>Candidate Alerts</a></li>
+                    <li><a href=""><i class="las la-envelope"></i>Messages</a></li> 
+                    <li><a href=""><i class="las la-video"></i>Meetings</a></li>   
+                    <li><a href=""><i class="la la-lock"></i>Change Password</a></li>
+                    <li><a href="{{url_for('main.logout')}}"><i class="la la-sign-out"></i>Logout</a></li>
+                    <li><a href=""><i class="la la-trash"></i>Delete Profile</a></li>
+                </ul>
+            </div>
+            </div>
+            <!-- End User Sidebar -->
+
+            <div class="user-dashboard">
+                <br><br><br><br>
+                <div class=" fullpageerrorbox  bg-light">
+                    {% block employer_errorcontainer %}{% endblock %}
+                    <br>
+                    <a href="{{url_for('main.home')}}" class="btn theme-btn btn-style-one">Home Page</a>
+                </div>
+            </div>
+            <br><br><br><br>
+
+        {% else %}
+
+            <div class="error-section">
+                <div class=" fullpageerrorbox  bg-light">
+                    {% block errorcontainer %}{% endblock %}
+                    <br>
+                    <a href="{{url_for('main.home')}}" class="btn theme-btn btn-style-one">Home Page</a>
+                </div>
+            </div>
+            <br><br><br><br>
+
+    {% endif %}
+
+    {% endblock %}
+

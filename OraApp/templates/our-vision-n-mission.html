@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+ 
+
+{% block container %}
+<div class="bg-white">
+
+<!--Page Title-->
+<br>
+<section class="page-title">
+    <div class="auto-container">
+      <div class="title-outer">
+        <h1>Our Mission And Vision</h1>
+        <ul class="page-breadcrumb">
+          <li><a href="{{url_for('main.home')}}">Home</a></li>
+          <li>Our Mission And Vision</li>
+        </ul>
+      </div>
+    </div>
+</section>
+  <!--End Page Title-->
+
+  <section class="about-section-three">
+    <div class="auto-container">
+      
+
+      <br>
+      <br>
+      <div class="text-box">
+        <h4>Our Mission</h4>
+        <p align="justify">
+            Gender bias is a massive contributor to the issues women face in trying to secure a STEM job. DEIR is dedicated to the advancement of diversity and inclusion in STEM fields. This is the core of our mission, to create a safe and inclusive recruitment process and enable employment of all women in STEM including women of colour and women from culturally and linguistically diverse (CALD) backgrounds.        
+        </p>
+      </div>
+      <br>
+      <br>
+      <div class="text-box">
+        <h4>Our Vision</h4>
+        <p align="justify">
+            At DEIR, we believe that diversity drives innovation and progress. By facilitating the recruitment and employment of women in STEM, we are helping to create a more dynamic, innovative, and equitable society. Our vision is to eliminate recruitment bias for ALL women in STEM to enable them contribute their skills and qualifications to the STEM industry, thereby increasing the statistics and representation of women in STEM globally beginning with Australia.        </p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+<hr style="height: 4px;">
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

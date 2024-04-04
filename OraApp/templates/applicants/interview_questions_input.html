@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+        <div class="upper-title-box">
+            <h3>Your Interview</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ls-widget">
+                    <div class="tabs-box">
+                        {% for index, question_set in question_list_with_index %}
+                        <div class="widget-title">
+                            <h4>Question {{ index + 1 }}:</h4>
+                        </div>
+                        <div class="widget-content">
+                            {% if question_set %}
+                            <p>{{ question_set }}</p>
+                            {% else %}
+                            <p class="text">No Questions.</p>
+                            {% endif %}
+                        </div>
+                        <div class="widget-title">
+                            <h4>Your Answer for Question {{ index + 1 }}:</h4>
+                        </div>
+                        <div class="widget-content">
+                            <form class="default-form" method="POST"
+                                action="{{ url_for('applicant.submit_interview') }}" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="answer{{ index + 1 }}" class="form-label">Answer {{ index + 1
+                                        }}:</label>
+                                    <textarea class="form-control" id="answer{{ index + 1 }}"
+                                        name="answer{{ index + 1 }}" rows="4" required></textarea>
+                                </div>
+                            
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="widget-content"> <!-- Move the button inside the white box -->
+                            <button type="submit" class="theme-btn btn-style-one">Submit</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+{% endblock %}

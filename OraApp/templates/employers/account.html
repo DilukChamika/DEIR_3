@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+<!-- Dashboard -->
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Hello, {{user.name}}</h3>
+      </div>
+      <div class="row">
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item">
+            <div class="left">
+              <i class="icon flaticon-briefcase"></i>
+            </div>
+            <a href="{{ url_for('employer.posted_jobs') }}">
+            <div class="right">
+              <h4> {{ jobs|length }}</h4>
+              <p>Posted Jobs</p>
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item ui-red">
+            <div class="left">
+              <!-- <i class="icon la la-file-invoice"></i> -->
+              <i class="icon lab la-wpforms"></i>
+            </div>
+            <a href="{{ url_for('employer.applicants') }}">
+            <div class="right">
+              <h4>{{ applicants|length }}</h4>
+              <p>Applicants</p>
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item ui-green">
+            <div class="left">
+              <!-- <i class="icon la la-comment-o"></i> -->
+              <i class="icon las la-user-check"></i>
+            </div>
+            <a href="{{ url_for('employer.listed_applicants') }}">
+            <div class="right">
+              <h4>{{ listed|length }}</h4>
+              <p>Shortlisted Applicants</p>
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="ui-item ui-yellow">
+            <div class="left">
+              <!-- <i class="icon la la-bookmark-o"></i> -->
+              <i class="icon las la-handshake"></i>
+            </div>
+            <a href="{{ url_for('employer.notifications') }}">
+            <div class="right">
+              <h4>{{ notifications|length }}</h4>
+              <p>Zoom Meeting Transcripts</p>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <!-- Dashboard for Sub-Employers -->
+        {% if assigned_applicants %}
+        <div class="dashboard" style="margin: 50px auto;">
+            <h4>Invitations to score Applicants</h4>
+            {% for applicant in assigned_applicants %}
+            <form action="{{ url_for('employer.submit_scores_subemployer', applicant_id=applicant.id) }}" method="post">
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h2>Submit Scores</h2>
+                        <p>Scoring for Applicant ID: {{ applicant.id }}</p>
+                        <div class="form-group">
+                            <label for="applicant_score">Applicant Score: {{ applicant_scores[applicant.id].similarity_score }}</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <p class="text-muted">Job Description: {{ applicant_scores[applicant.id].job_description }}</p>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-muted">Confidence: {{ applicant_scores[applicant.id].personality_score.person_score.confidence }}</p>
+                            <p class="text-muted">Ethical: {{ applicant_scores[applicant.id].personality_score.person_score.ethical }}</p>
+                            <p class="text-muted">Leadership: {{ applicant_scores[applicant.id].personality_score.person_score.leadership }}</p>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-muted">Primary Count: {{ applicant_scores[applicant.id].education_score.primary_count }}</p>
+                            <p class="text-muted">Secondary Count: {{ applicant_scores[applicant.id].education_score.secondary_count }}</p>
+                            <p class="text-muted">Higher Count: {{ applicant_scores[applicant.id].education_score.higher_count }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="your_score">Your Score:</label>
+                            <input type="range" id="your_score" name="your_score" min="0" max="50" class="form-range"
+                                value="25">
+                            <output for="your_score"></output>
+                        </div>
+                        
+                        
+                        <button type="submit" class="btn btn-primary">Submit Scores</button>
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <br>
+            <h4>Analytics</h4>
+            <div class="row">
+              <div class="col-md-5"></div>
+              <div class="col-md-2">
+                <button id="downloadPdfBtn" class="btn-style-three">Download Charts as PDF</button>
+                <br><br>
+              </div>
+              <div class="col-md-5"></div>
+            </div>
+
+            <br><br>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12"> <!-- Center the first column -->
+                    <div class="graph-widget ls-widget" style="position: relative;">
+                        <div class="tabs-box">
+                            <div class="widget-content" style="position: relative;">
+                                <canvas id="myBarChart" width="500" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12"> <!-- Center the third column -->
+                    <div class="graph-widget ls-widget" style="position: relative;">
+                        <div class="tabs-box">
+                            <div class="widget-content" style="position: relative;">
+                                <canvas id="myPieChart" width="600" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-6 col-lg-6 col-md-12"> <!-- Center the second column -->
+                    <div class="graph-widget ls-widget" style="position: relative;">
+                        <div class="tabs-box">
+                            <div class="widget-content" style="position: relative;">
+                                <canvas id="applicants_over_time" width="600" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+
+                
+            </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- End Dashboard -->
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+<script>
+    // Bar Chart
+    var initialData = [0 ,0 , 30];
+    var ctxBar = document.getElementById('myBarChart').getContext('2d');
+    var myBarChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['Posted Jobs','Applicants', 'Shortlisted'],
+            datasets: [{
+                label: 'Bar Graph',
+                data: initialData,
+                backgroundColor: ['#3e6181', '#149dc1', '#15d5d1']
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                y: {beginAtZero: true}
+            }
+        }
+    });
+
+    // Sample data for dates and amounts (replace this with your actual data)
+        var dates = ['2023-10-01', '2023-11-01', '2023-12-01', '2024-01-01', '2024-01-10'];
+        var amounts = [5, 10, 8, 15, 12];
+
+        var myLineChart = new Chart(document.getElementById("applicants_over_time"), {
+            type: "line",
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: "applicants_over_time",
+                    data: amounts,
+                    fill: false,
+                    borderColor: "rgb(75, 192, 192)",
+                    lineTension: 0.1
+                }]
+            },
+            options: {}
+        });
+
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Posted Jobs', 'Applicants', 'Shortlisted', 'Notifications'],
+                    datasets: [{
+                        label: 'Data', // Label for the entire dataset
+                        data: [10, 20, 30, 40],
+                        backgroundColor: [
+                            '#f4e2f1',   // Color for Posted Jobs
+                            '#bc9cdc',    // Color for Applicants
+                            '#8a04fc', // Color for Shortlisted
+                            '#4c0cc4'       // Color for Notifications
+                        ],
+                        borderWidth: 1,
+                        hoverBorderColor: "black",
+                        hoverBorderWidth: 2,
+                        hoverBackgroundColor: 'rgba(154, 245, 140)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    // No need for scales in a pie chart
+                }
+            });
+            
+  // Fetch the applicant count from the server
+    fetch("/employer/posted-job-count/")
+        .then(response => response.json())
+        .then(data => {
+            const applicantCount = data.applicant_count;
+
+            // Update the chart data
+            myLineChart.data.datasets[0].data[4] = applicantCount;  // Replace the hardcoded value for "Applicants"
+            myLineChart.update(); // Update the chart
+        });
+
+    // Fetch the posted job count
+    fetch("/employer/posted-job-count/")
+        .then(response => response.json())
+        .then(data => {
+            //const jobCount = data.job_count;
+            const jobCount = data.job_count;
+            const applicantCount = 50//data.applicant_count;
+            const shortlistedCount = data.shortlisted_count;
+            console.log(jobCount)
+            console.log(applicantCount)
+            console.log(shortlistedCount)
+
+            myBarChart.data.datasets[0].data = [jobCount,applicantCount, shortlistedCount];
+            myBarChart.update();
+    })
+    .catch(error => console.error("Error fetching employer stats:", error));
+
+
+
+    // Fetch the applicant count from the server
+        fetch("/employer/posted-job-count/")
+            .then(response => response.json())
+            .then(data => {
+                const jobCount = data.job_count;
+                const applicantCount = 50 //data.applicant_count;
+                const shortlistedCount = data.shortlisted_count;
+                const notificationsCount = 40;
+
+                // Update the pie chart data
+                myPieChart.data.datasets[0].data = [jobCount, applicantsCount, shortlistedCount, notificationsCount];
+                myPieChart.update(); // Update the chart
+            });
+
+        // Chart.defaults.global.defaultFontFamily = "Noto Sans";
+        // Chart.defaults.global.defaultFontColor = '#888';
+        // Chart.defaults.global.defaultFontSize = '14';
+
+    // var ctx = document.getElementById('chart').getContext('2d');
+
+    // var chart = new Chart(ctx, {
+
+    //   type: 'line',
+    //   // The data for our dataset
+    //   data: {
+    //     labels: ["January", "February", "March", "April", "May", "June"],
+    //     // Information about the dataset
+    //     datasets: [{
+    //       label: "Views",
+    //       backgroundColor: 'transparent',
+    //       borderColor: '#1967D2',
+    //       borderWidth: "1",
+    //       data: [196, 132, 215, 362, 210, 252],
+    //       pointRadius: 3,
+    //       pointHoverRadius: 3,
+    //       pointHitRadius: 10,
+    //       pointBackgroundColor: "#1967D2",
+    //       pointHoverBackgroundColor: "#1967D2",
+    //       pointBorderWidth: "2",
+    //     }]
+    //   },
+
+    //   // Configuration options
+    //   options: {
+
+    //     layout: {
+    //       padding: 10,
+    //     },
+
+    //     legend: {
+    //       display: false
+    //     },
+    //     title: {
+    //       display: false
+    //     },
+
+    //     scales: {
+    //       yAxes: [{
+    //         scaleLabel: {
+    //           display: false
+    //         },
+    //         gridLines: {
+    //           borderDash: [6, 10],
+    //           color: "#d8d8d8",
+    //           lineWidth: 1,
+    //         },
+    //       }],
+    //       xAxes: [{
+    //         scaleLabel: {
+    //           display: false
+    //         },
+    //         gridLines: {
+    //           display: false
+    //         },
+    //       }],
+    //     },
+
+    //     tooltips: {
+    //       backgroundColor: '#333',
+    //       titleFontSize: 13,
+    //       titleFontColor: '#fff',
+    //       bodyFontColor: '#fff',
+    //       bodyFontSize: 13,
+    //       displayColors: false,
+    //       xPadding: 10,
+    //       yPadding: 10,
+    //       intersect: false
+    //     }
+    //   },
+    // });
+       function downloadChartsAsPDF() {
+        console.log('Inside function')
+          // Create a new jsPDF instance
+          var pdf = new jsPDF();
+
+          // Define a function to add chart canvas to the PDF
+          function addChartToPDF(canvas, index) {
+            // Convert canvas to data URL
+            var imgData = canvas.toDataURL('image/png');
+
+            // Add image to PDF
+            pdf.addImage(imgData, 'PNG', 10, 10, 180, 120); // Adjust position and size as needed
+
+            // Add new page if not the last canvas
+            if (index < canvases.length - 1) {
+              pdf.addPage();
+            }
+          }
+
+          // Grab the canvas elements
+          var canvas3 = document.getElementById("applicants_over_time");
+          var canvas2 = document.getElementById("myPieChart");
+          var canvas1 = document.getElementById("myBarChart");
+
+          var canvases = [canvas1, canvas2, canvas3];
+
+          // Add each canvas to the PDF
+          canvases.forEach(addChartToPDF);
+
+          // Save the PDF
+          pdf.save('charts.pdf');
+        }
+        // Attach event listener to the button
+        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+          console.log('clicked download pdf button');
+          // Call the downloadChartsAsPDF function when the button is clicked
+          downloadChartsAsPDF();
+        });
+  </script>
+
+{% endblock %}

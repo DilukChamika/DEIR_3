@@ -1,0 +1,283 @@
+
+{% extends 'base.html' %}
+ 
+
+{% block container %}
+
+<div class="bg-white">
+
+
+
+
+
+<!--Page Title-->
+<br>
+<section class="page-title">
+    <div class="auto-container">
+      <div class="title-outer">
+        <h1>About Us</h1>
+        <ul class="page-breadcrumb">
+          <li><a href="{{url_for('main.home')}}">Home</a></li>
+          <li>About Us</li>
+        </ul>
+      </div>
+    </div>
+</section>
+  <!--End Page Title-->
+
+  <section class="about-section-three">
+    <div class="auto-container">
+      <div class="images-box">
+        <div class="row">
+          <div class="column col-lg-3 col-md-6 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/g3.jpg')}}" alt=""></figure>
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/g6.jpg')}}" alt=""></figure>
+          </div>
+          <div class="column col-lg-3 col-md-6 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/g5.jpg')}}" alt=""></figure>
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/27A9484-1 (1).jpg')}}" alt=""></figure>
+          </div>
+          <div class="column col-lg-3 col-md-6 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/g4.jpg')}}" alt=""></figure>
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/20220511_134804-2048x1536.jpg')}}" alt=""></figure>
+          </div>
+          <div class="column col-lg-3 col-md-6 col-sm-6">
+            <figure class="image"><img src="{{url_for('static', filename='img/resource/g2.jpg')}}" alt=""></figure>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <div class="text-box">
+        <h4>About Deir</h4>
+        <p>
+            DEIR is a recruit-tech platform where employers can post jobs and women in STEM can search for jobs in an equitable space using our unique features including anonymous recruitment, job benchmarking, standardised interviews and mentoring retention program.  
+        </p>
+        <p>
+            <span style="color: black !important;">In Australia, only 29% of women are in the STEM workforce.</span> The numbers are even worse for women of colour or culturally and linguistically diverse women in STEM, with over four times higher unemployment rates. Employers have cited insufficient applications from women while the women have complained about bias in recruitment, including name, gender, accent, age, country of origin, discrimination etc. DEIR is set to eliminate all of the mentioned biases and provide the opportunity for ALL women in STEM to have equal opportunities in gaining employment in an equitable space.
+        </p>
+      </div>
+    </div>
+  </section>
+
+   <!-- Call To Action Two -->
+   <section class="call-to-action-two" style="background-image: url(../static/img/background/1.jpg);">
+    <div class="auto-container">
+      <div class="sec-title light text-center">
+        <h2>Your Dream Jobs Are Waiting</h2>
+        <!-- <div class="text">Over 1 million interactions, 50,000 success stories Make yours now.</div> -->
+      </div>
+
+      <div class="btn-box">
+        <a href="{{url_for('jobs.job_list')}}" class="theme-btn btn-style-three">Search Job</a>
+      </div>
+    </div>
+  </section>
+  <!-- End Call To Action -->
+
+  <br><br>
+  <!-- Testimonials Section -->
+  <section class="layout-pt-120 layout-pb-120 section-bg-color -light">
+    <div class="section-bg-color__item -light"></div>
+
+    <div class="auto-container">
+      <div class="row justify-content-center text-center">
+        <div class="col-auto">
+          <div class="">
+            <h2 class="fw-700">Our success stories</h2>
+            <div class="text mt-9">This is what our women are saying…</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="job-carousel pt-50 wow fadeInUp owl-carousel owl-theme default-dots">
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/1.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Recognizing the Impact of iSTEM Co</h4>
+            <p>
+              I wanted to thank you for the great job that you are doing. I become familiar with Morely at Victoria University in one of the water advisory board meetings. Then, I become familiar with iSTEM as a talent-sourcing company, that promotes women and provides job opportunities for them in various sectors, concerning their abilities and talents regardless of their sex and race. I have also participated in the career fair event organized by you, and through this event, I had a chance to get to know many bright people and network with the industry.
+              You both helped me to introduce myself as a qualified and skilfulness person who is able to carry out her career whether in a team or independently, and now that I am starting a new position as an Internship in South East Water.
+              I hope the iSTEM grows fast in promoting women in STEM and more women can get a chance to become familiar with their capabilities.        
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Maedeh</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/2.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Informative</h4>
+            <p>
+              The first meeting held by Morley and Ruwangi from iSTEM Co. for the ongoing internship was very informative. We were given a packet of information that included noting down everyday schedules, making sure we are in speed, bring whole self to work in different ways and setting the goal of getting the team to reflect on the company's behavior. They also posed a series of questions like what will work well and what can we do better. 
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Aayusha Singh</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/3.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Gaining Practical Experience</h4>
+            <p>
+              I am happy with iSTEM Co. regarding the internship opportunity at South East Water. I was looking for a place similar to my research work that will give me an excellent opportunity to avail myself of field experience and enrich my practical knowledge. iSTEM Co. helps me to find out that. I am grateful to Dr. Morley and Dr. Ruwangi for their friendly support and for providing me with this opportunity.
+              I wish them the best of luck in the future. 
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Shamima</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/2.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>Breaking Barriers</h4>
+            <p>
+              As a MSc graduate in Cyber Security from Deakin University with an Engineering background obtained overseas, I desperately needed to have an opportunity of applying my skills acquired during my study to real life application. Working with iSTEM Co. has improved my Digital literacy and given me a sense of purpose. I work to ensure security and safety across iSTEM Co.’s networks. As a new mum, a migrant and a woman of colour, I have tried to apply for work in several organisations with no results. I have experienced the bias and challenges involved in securing employment in the ICT sector. iSTEM Co. has given me hope to dream again and what is more interesting is that I get to invest my time and skills to make a social change that transforms workplaces for women from vulnerable backgrounds.            
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Dakorim</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+        <!-- Job Block -->
+        <div class="testimonial -type-1">
+          <!-- <div class="image">
+            <img src="images/index-12/testimonials/3.png" alt="image">
+          </div> -->
+
+          <div class="content">
+            <h4>From Struggling Graduate to Thriving Intern</h4>
+            <p>
+              After completing my bachelors in Software and Mobile App Development at Victoria University, I struggled with employment. No company was willing to take the risk of employing a fresh graduate with no experience. iSTEM Co. gave me the opportunity to apply my learning to real-life applications. The wealth of knowledge and digital advancement    I have acquired since beginning my internship with iSTEM Co. is incredible. I get to work with Dr Ruwangi Fernando, an expert Data Scientist and a team of specialised ICT professionals. I am glad to be given a chance.            
+            </p>
+          </div>
+
+          <div class="author">
+            <div class="name">Jean</div>
+            <!-- <div class="job">Team Leader, Paypal</div> -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+  <!-- End Testimonials Section -->
+
+    <!--How it works-->
+    <section class="work-section">
+      <div class="auto-container">
+        <div class="sec-title text-center">
+          <h2><b>How It Works?</b></h2>
+          <p class="text">Job for anyone, anywhere</p>
+        </div>
+  
+        <div class="row wow fadeInUp">
+          <!-- Work Block -->
+          <div class="work-block col-lg-4 col-md-6 col-sm-12">
+            <div class="inner-box" style="border: 1px solid #f0f0f0;">
+              <figure class="image"><img src="{{url_for('static', filename='img/step1.jpg')}}" alt="" style="text-align: center; padding: 5%;"></figure>
+              <h5><b><span style="color: red;">01 </span> Resume</b></h5>
+              <p>Create your resume using one of these templates</p>
+            </div>
+          </div>
+  
+          <!-- Work Block -->
+          <div class="work-block col-lg-4 col-md-6 col-sm-12">
+            <div class="inner-box" style="border: 1px solid #f0f0f0;">
+              <figure class="image"><img src="{{url_for('static', filename='img/step2.jpg')}}" alt="" style="text-align: center; padding: 5%;"></figure>
+              <h5><b><span style="color: red;">02 </span> Employability Workshop</b></h5>
+              <p>Sign up for our employability workshop training</p>
+            </div>
+          </div>
+  
+          <!-- Work Block -->
+          <div class="work-block col-lg-4 col-md-6 col-sm-12">
+            <div class="inner-box" style="border: 1px solid #f0f0f0;">
+              <figure class="image"><img src="{{url_for('static', filename='img/step3.jpg')}}" alt="" style="text-align: center; padding: 5%;"></figure>
+              <h5><b><span style="color: red;">03 </span> Mentoring Program</b></h5>
+              <p>Access our mentoring retention program to facilitate leadership and career advancement</p>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </section>
+    <!--end HowItWorks-->
+
+
+
+
+    <!--Some STEM Companies We Engage With-->
+  <section class="work-section">
+    <div class="auto-container">
+      <div class="sec-title">
+        <h2><b>Here are some organisations we are affiliated with:</b></h2>
+      </div>
+    </div>
+    <div class="row auto-container" style="display: flex; align-items: center;">
+      <div class="col-md-3 col-sm-4">
+        <div class="inner-box" style="text-align: center;">
+          <figure class="image grayimg"> <a href="https://stemsisters.org.au/"> <img src="{{url_for('static', filename='img/aboutlogo1.png')}}" alt="" style="width: 200px; height: auto; text-align: center; padding: 5%;"></a></figure>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <div class="inner-box" style="text-align: center;">
+          <figure class="image grayimg"> <a href="https://www.futurewomen.com/"> <img src="{{url_for('static', filename='img/aboutlogo2.png')}}" alt="" style="width: 200px; height: auto; text-align: center; padding: 5%;"> </a> </figure>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <div class="inner-box" style="text-align: center;">
+          <figure class="image grayimg"> <a href="https://icn.org.au/"> <img src="{{url_for('static', filename='img/aboutlogo3.png')}}" alt="" style="width: 200px; height: auto; text-align: center; padding: 5%;"> </a></figure>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <div class="inner-box" style="text-align: center;">
+          <figure class="image grayimg"> <a href="https://womeninstemm.au/"> <img src="{{url_for('static', filename='img/aboutlogo4.png')}}" alt="" style="width: 200px; height: auto; text-align: center; padding: 5%;"> </a></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--end Some STEM Companies We Engage With-->
+
+
+
+<hr style="height: 4px;">
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

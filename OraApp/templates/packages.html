@@ -1,0 +1,153 @@
+
+{% extends 'base.html' %}
+                          
+{% block container %}
+
+<div class="bg-white">
+
+<!--Page Title-->
+<br>
+<section class="page-title">
+    <div class="auto-container">
+      <div class="title-outer">
+        <h1>Packages</h1>
+        <ul class="page-breadcrumb">
+          <li><a href="{{url_for('main.home')}}">Home</a></li>
+          <li>Packages</li>
+        </ul>
+      </div>
+    </div>
+</section>
+  <!--End Page Title-->
+
+
+<!-- Pricing Sectioin -->
+<section class="pricing-section">
+    <div class="auto-container">
+      <div class="sec-title text-center">
+        <h2>Pricing Packages</h2>
+      </div>
+      <!--Pricing Tabs-->
+      <div class="pricing-tabs tabs-box">
+        <!--Tab Btns-->
+        <!-- <div class="tab-buttons">
+          <h4>Save up to 10%</h4>
+          <ul class="tab-btns">
+            <li data-tab="#monthly" class="tab-btn active-btn">Monthly</li>
+            <li data-tab="#annual" class="tab-btn">AnnualSave</li>
+          </ul>
+        </div> -->
+
+        <!--Tabs Container-->
+        <div class="tabs-content">
+
+          <!--Tab / Active Tab-->
+          <div class="tab active-tab" id="monthly">
+            <div class="content">
+              <div class="row">
+                <!-- Pricing Table -->
+                <div class="pricing-table col-lg-3 col-md-6 col-sm-12">
+                  <div class="inner-box">
+                    <div class="title">Trial Premium Plan</div>
+                    <div class="price">Free</div>
+                    <div class="table-content">
+                      <ul>
+                        <li><span>No lock-in contract.</span></li>
+                        <li><span>Up to 50 job posts per month</span></li>
+                        <li><span>Access to a database of women in STEMM</span></li>
+                        <li><span>Anonymous talent search</span></li>
+                        <li><span>Ethical Job posting and interview guidelines</span></li>
+                        <li><span>Up to 60 days of advertisement for jobs posted</span></li>
+                      </ul>
+                    </div>
+                    <div class="table-footer">
+                      <a href="#" class="theme-btn btn-style-three">Add to Cart</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="pricing-table  col-lg-3 col-md-6 col-sm-12">
+                  <div class="inner-box">
+                    <!-- <span class="tag">Recommended</span> -->
+                    <div class="title">Trail Basic Plan</div>
+                    <div class="price">Free</div>
+                    <div class="table-content">
+                      <ul>
+                        <li><span>No lock-in contract.</span></li>
+                        <li><span>Up to 10 job posts per month</span></li>
+                        <li><span>Access to a database of women in STEMM</span></li>
+                        <li><span>Anonymous talent search </span></li>
+                        <li><span>Ethical Job posting and interview guidelines</span></li>
+                        <li><span>Up to 60 days of advertisement for jobs posted </span></li>
+                      </ul>
+                    </div>
+                    <div class="table-footer">
+                      <a href="#" class="theme-btn btn-style-three">Add to Cart</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="pricing-table  col-lg-3 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                      <!-- <span class="tag">Recommended</span> -->
+                      <div class="title">Premium</div>
+                      <div class="price">$5,000.00 <span class="duration">/ 12 months</span></div>
+                      <div class="table-content">
+                        <ul>
+                          <li><span>12 Months contract with monthly recurring payments</span></li>
+                          <li><span>Up to 50 job posts</span></li>
+                          <li><span>Access to a database of women in STEMM</span></li>
+                          <li><span>Anonymous talent search</span></li>
+                          <li><span>Ethical Job posting and interview guidelines</span></li>
+                          <li><span>Badge for committed employers for one year</span></li>
+                          <li><span>Up to 60 days advertisement for jobs posted</span></li>
+                        </ul>
+                      </div>
+                      <div class="table-footer">
+                        <a href="#" class="theme-btn btn-style-three">Sign Up Now</a>
+                      </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="pricing-table  col-lg-3 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                      <!-- <span class="tag">Recommended</span> -->
+                      <div class="title">Basic</div>
+                      <div class="price">$5,000.00 <span class="duration">/ 12 months</span></div>
+                      <div class="table-content">
+                        <ul>
+                          <li><span>12 Months contract with monthly recurring payments</span></li>
+                          <li><span>Post up to 10  jobs per month</span></li>
+                          <li><span>Access to a database of women in STEMM</span></li>
+                          <li><span>Anonymous talent search</span></li>
+                          <li><span>Ethical Job posting and interview guidelines</span></li>
+                          <li><span>Badge for committed employers for one year</span></li>
+                          <li><span>Up to 60 days advertisement for jobs posted</span></li>
+                        </ul>
+                      </div>
+                      <div class="table-footer">
+                        <a href="#" class="theme-btn btn-style-three">Sign Up Now</a>
+                      </div>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Pricing Section -->
+
+
+<hr style="height: 4px;">
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,176 @@
+
+{% extends 'base.html' %}
+                          
+{% block container %}
+<div class="bg-white">
+
+<!--Page Title-->
+<br>
+<section class="page-title">
+    <div class="auto-container">
+      <div class="title-outer">
+        <h1>Blog</h1>
+        <ul class="page-breadcrumb">
+          <li><a href="{{url_for('main.home')}}">Home</a></li>
+          <li>Blog</li>
+        </ul>
+      </div>
+    </div>
+</section>
+  <!--End Page Title-->
+
+  <!-- Sidebar Page Container -->
+  <div class="sidebar-page-container">
+    <div class="auto-container">
+      <div class="row">
+        <!--Content Side-->
+        <div class="content-side col-lg-8 col-md-12 col-sm-12">
+          <div class="blog-grid">
+            <div class="row">
+              <!-- News Block -->
+              <div class="news-block col-lg-6 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image"><img src="{{url_for('static', filename='img/resource/news4.png')}}" alt="" /></figure>
+                  </div>
+                  <div class="lower-content">
+                    <ul class="post-meta">
+                      <li><a href="#">February 7, 2023</a></li>
+                      <li><a href="#">Uncategorized</a></li>
+                      <li><a href="#">0 Comment</a></li>
+                    </ul>
+                    <h3><a href="#">Why people get rejected for jobs?</a></h3>
+                    <!-- <p class="text">A job ravenously while Far much that one rank beheld after outside....</p> -->
+                    <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- News Block -->
+              <div class="news-block col-lg-6 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image"><img src="{{url_for('static', filename='img/resource/news3.png')}}" alt="" /></figure>
+                  </div>
+                  <div class="lower-content">
+                    <ul class="post-meta">
+                        <li><a href="#">February 3, 2023</a></li>
+                        <li><a href="#">Uncategorized</a></li>
+                        <li><a href="#">0 Comment</a></li>
+                    </ul>
+                    <h3><a href="#">Why are companies adopting remote working for their employees today: Pros and Cons</a></h3>
+                    <p class="text">Remote working is a flexible work arrangement that allows employees to perform their ...</p>
+                    <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- News Block -->
+              <div class="news-block col-lg-6 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image"><img src="{{url_for('static', filename='img/resource/news1.png')}}" alt="" /></figure>
+                  </div>
+                  <div class="lower-content">
+                    <ul class="post-meta">
+                        <li><a href="#">February 3, 2023</a></li>
+                        <li><a href="#">Uncategorized</a></li>
+                        <li><a href="#">0 Comment</a></li>
+                    </ul>
+                    <h3><a href="blog-single.html">9 ways to brand your business using social media</a></h3>
+                    <p class="text">Social media has revolutionized the way businesses work nowadays. Keeping that in mind ...</p>
+                    <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- News Block -->
+              <div class="news-block col-lg-6 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image"><img src="{{url_for('static', filename='img/resource/news2.png')}}" alt="" /></figure>
+                  </div>
+                  <div class="lower-content">
+                    <ul class="post-meta">
+                        <li><a href="#">February 2, 2023</a></li>
+                        <li><a href="#">Uncategorized</a></li>
+                        <li><a href="#">0 Comment</a></li>
+                    </ul>
+                    <h3><a href="blog-single.html">Modern Art of Networking in STEM Workplace</a></h3>
+                    <p class="text">Networking is not just interrelating with people professionally, but it also fosters relationship ...</p>
+                    <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- News Block -->
+              <div class="news-block col-lg-6 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image"><img src="{{url_for('static', filename='img/resource/news5.png')}}" alt="" /></figure>
+                  </div>
+                  <div class="lower-content">
+                    <ul class="post-meta">
+                        <li><a href="#">February 2, 2023</a></li>
+                        <li><a href="#">Uncategorized</a></li>
+                        <li><a href="#">0 Comment</a></li>
+                    </ul>
+                    <h3><a href="blog-single.html">Navigating STEM Careers for Women : A Career Toolkit</a></h3>
+                    <p class="text">The percentage of women working across STEM qualified industries according to the STEM ...</p>
+                    <a href="#" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              
+
+            </div>
+
+            <!-- Pagination -->
+            <!-- <nav class="ls-pagination">
+              <ul>
+                <li class="prev"><a href="#"><i class="fa fa-arrow-left"></i></a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#" class="current-page">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="next"><a href="#"><i class="fa fa-arrow-right"></i></a></li>
+              </ul>
+            </nav> -->
+          </div>
+        </div>
+
+        <!--Sidebar Side-->
+        <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+          <aside class="sidebar blog-sidebar">
+
+            <!-- Recent Post -->
+            <div class="sidebar-widget search-widget">
+              <div class="sidebar-title">
+                <h4>Search by Keywords</h4>
+              </div>
+
+              <!--search box-->
+              <div class="search-box">
+                <form method="post" action="#">
+                  <div class="form-group">
+                    <span class="icon flaticon-search-1"></span>
+                    <input type="search" name="search-field" value="" placeholder="keywords" required="">
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Sidebar Container -->
+
+
+<hr style="height: 4px;">
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

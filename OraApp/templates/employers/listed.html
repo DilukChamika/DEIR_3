@@ -1,0 +1,324 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h4>Listed Applicants: {{ applicants.total }}</h4>
+      </div>
+   
+
+      <div class="row">
+
+
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6 col-lg-12">
+          <!-- Graph widget -->
+          <div class="graph-widget ls-widget">
+            <div class="tabs-box">
+              <div class="widget-content">
+                <canvas id="myMultipleBarChart" width="500" height="400"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3"></div>
+
+
+
+        <div class="col-lg-12">
+          <!-- applicants Widget -->
+          <div class="applicants-widget ls-widget">
+            <div class="widget-title">
+              <h4>Applicants</h4>
+            </div>
+            <div class="widget-content">
+              <div class="row">
+
+                {% for user, job in applicants.items %}
+
+                <div class="modal fade jobdelmodal" id="unlist-applicant{{user.id}}" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content bg-c-white t-dark">
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="">Remove Applicant from List?</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <form action="{{ url_for('employer.listed_applicants', job_id=job.id, applicant_id=user.id) }}" method="post">
+                                    <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Candidate block three -->
+                <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                  <div class="inner-box">
+                    <div class="content">
+                      <figure class="image"><img src="{{ url_for('static', filename='applicant/image/' + user.image) }}" alt=""></figure>
+                      <h4 class="name">Applicant ID : {{ user.id}}</h4><br>
+                      <ul class="candidate-info">
+                        <li class="designation"><a href="tel:{{ user.phone }}" target="_blank"><span class="fa fa-phone"></span> &nbsp; {{ user.phone }}</a></li>
+                      </ul><br>
+                      <ul class="post-tags">
+                        <li>
+                            {% for shortlisted_user in similarity_info %}
+                                <script>
+                                    console.log("INSIDE FOR STATEMENT!!!!");
+                                        console.log("INSIDE IF STATEMENT!!!!");
+                                    console.log("User ID: {{ shortlisted_user['id']}}");
+                                        console.log("Shortlisted Users Info: {{ similarity_info }}");
+                                </script>
+                                {% if shortlisted_user['applicant_id'] == user.id %}
+                                    <script>
+                                        console.log("INSIDE IF STATEMENT!!!!");
+                                    </script>
+                                    Matched this Job : {{ shortlisted_user['similarity_score'] }}%
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <br>
+                      <p>
+                        Listed for 
+                            <a href="{{ url_for('employer.job_details', job_id=job.id) }}" class=""> 
+                                {{ job.title }}
+                                <i class="fa fa-check-square-o"></i>
+                            </a>
+                      </p>
+                    </div>
+                    <!-- <div class="option-box">
+                      <ul class="option-list">
+                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                        <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
+                        <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
+                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                      </ul>
+                    </div> -->
+                    <div class="ms-auto d-flex flex-column align-items-center">
+                                   
+                        <!-- Buttons container -->
+                        <div class="d-flex">
+                            <!-- Interview button -->
+                            <a href="{{ url_for('employer.interview_applicant_page', applicant_id=user.id, job_id=job.id) }}"
+                                class="btn btn-sm btn-success me-2">
+                                Selection Criteria <i class="fa fa-calendar-check-o"></i>
+                            </a>
+
+                            <!-- Score button -->
+                            <a href="{{ url_for('employer.score_this_applicant', applicant_id=user.id, job_id=job.id) }}"
+                                class="btn btn-sm btn-info me-2">
+                                Score This Applicant <i class="fa fa-star"></i>
+                            </a>
+
+                            <!-- Remove button -->
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#unlist-applicant{{user.id}}">Remove <i
+                                    class="fa fa-trash"></i></button>
+
+                            
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                {% endfor %}
+
+                {% if applicants.total > applicants.per_page %}
+                    {% for page_num in applicants.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                        {% if page_num %}
+                            {% if applicants.page == page_num %}
+                                <a href="{{ url_for('employer.listed_applicants', page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                            {% else %}
+                                <a href="{{ url_for('employer.listed_applicants', page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                            {% endif %}
+                        {% else %}
+                            ...
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}
+
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   // Multiple Bar Chart
+    var initialData = {
+        labels: ['Primary Education', 'Secondary Education', 'Higher Education'],
+        datasets: [
+            {
+                label: 'Bar 1',
+                backgroundColor: 'salmon',
+                data: [10, 20, 30]
+            },
+            {
+                label: 'Bar 2',
+                backgroundColor: 'limegreen',
+                data: [15, 25, 35]
+            },
+            {
+                label: 'Bar 3',
+                backgroundColor: 'gold',
+                data: [20, 30, 40]
+            }
+        ]
+    };
+
+    var ctxMultipleBar = document.getElementById('myMultipleBarChart').getContext('2d');
+    var myMultipleBarChart = new Chart(ctxMultipleBar, {
+        type: 'bar',
+        data: initialData,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stacked: true // Enable stacking for a multiple bar chart
+                },
+                x: {
+                    stacked: true // Enable stacking for a multiple bar chart
+                }
+            }
+        }
+    });
+    // Fetch the chart data from the server
+    fetch("/employer/compare-charts")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Fetched data:", data);  // Log the fetched data to the console
+
+            // Assuming data is an array of objects, each representing a shortlisted applicant's education details
+            // Extract the unique applicant IDs from the data
+            const applicantIds = data.map(entry => entry.applicant_id);
+            console.log("Applicant IDs:", applicantIds);  // Log the extracted applicant IDs to the console
+
+            // Initialize an array to store the cumulative counts
+            const cumulativeCounts = [0, 0, 0];
+
+            // Update the chart data for each applicant
+            for (const applicantId of applicantIds) {
+                const entry = data.find(e => e.applicant_id === applicantId);
+
+                if (entry) {
+                    const primaryCount = entry.primary_count;
+                    const secondaryCount = entry.secondary_count;
+                    const higherCount = entry.higher_count;
+
+                    // Update the cumulative counts
+                    cumulativeCounts[0] += primaryCount;
+                    cumulativeCounts[1] += secondaryCount;
+                    cumulativeCounts[2] += higherCount;
+
+                    // Update the data for the 'Applicants' label in the chart
+                    const datasetIndex = myMultipleBarChart.data.datasets.findIndex(dataset => dataset.label === 'Bar 1');
+                    if (datasetIndex !== -1) {
+                        myMultipleBarChart.data.datasets[datasetIndex].data = cumulativeCounts.slice();
+                    }
+                    console.log("Updating data for Applicant:", applicantId);
+                    console.log("Primary count for Applicant ID:", applicantId, "is as follows ", primaryCount);
+                    console.log("Secondary count for Applicant ID:", applicantId, "is as follows ", secondaryCount);
+                    console.log("Higher count for Applicant ID:", applicantId, "is as follows ", higherCount);
+                }
+            }
+            // Update the chart
+            myMultipleBarChart.update();
+        })
+        .catch(error => console.error("Error fetching data:", error));  // Log any errors to the console
+    // Fetch the chart data from the server
+    fetch("/employer/compare-charts")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Fetched data:", data);  // Log the fetched data to the console
+
+            // Assuming data is an array of objects, each representing a shortlisted applicant's education details
+            // Extract the unique applicant IDs from the data
+            const applicantIds = data.map(entry => entry.applicant_id);
+            console.log("Applicant IDs:", applicantIds);  // Log the extracted applicant IDs to the console
+
+            // Create an array to store datasets for each applicant
+            const applicantDatasets = [];
+
+            // Update the chart data for each applicant
+            for (const applicantId of applicantIds) {
+                const entry = data.find(e => e.applicant_id === applicantId);
+
+                if (entry) {
+                    const primaryCount = entry.primary_count;
+                    const secondaryCount = entry.secondary_count;
+                    const higherCount = entry.higher_count;
+
+                    // Create a new dataset for each applicant
+                    const newDataset = {
+                        label: `Applicant ${applicantId}`,
+                        backgroundColor: getRandomColor(), // Use a function to generate random colors
+                        data: [primaryCount, secondaryCount, higherCount]
+                    };
+
+                    // Add the new dataset to the array
+                    applicantDatasets.push(newDataset);
+
+                    console.log("Updating data for Applicant:", applicantId);
+                    console.log("Primary count for Applicant ID:", applicantId, "is as follows ", primaryCount);
+                    console.log("Secondary count for Applicant ID:", applicantId, "is as follows ", secondaryCount);
+                    console.log("Higher count for Applicant ID:", applicantId, "is as follows ", higherCount);
+                }
+            }
+
+            // Update the chart datasets with the new datasets
+            myMultipleBarChart.data.datasets = applicantDatasets;
+
+            // Update the chart
+            myMultipleBarChart.update();
+        })
+        .catch(error => console.error("Error fetching data:", error));  // Log any errors to the console
+
+    // ...
+
+    // Function to generate a random color
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+{% endblock %}

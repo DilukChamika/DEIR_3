@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+
+{% block container %}
+
+<br>
+
+<section class="page-title style-two">
+    <div class="auto-container">
+        <div class="title-outer">
+              <h1>Search Companies</h1>
+              <ul class="page-breadcrumb">
+                  <li><a href="{{url_for('main.home')}}">Home</a></li>
+                  <li>Search Companies</li>
+              </ul> 
+          </div>
+
+      <!-- Job Search Form -->
+      <div class="job-search-form">
+        <form method="post" action="{{ url_for('employer.company_search') }}">
+        {{ form1.hidden_tag() }}
+          <div class="row">
+            <!-- Form Group -->
+            <div class="form-group col-lg-10 col-md-12 col-sm-12">
+              <span class="icon flaticon-search-1"></span>
+              <input type="text" name="name" placeholder="Name or Location" required>
+            </div>
+
+            <!-- Form Group -->
+            <!-- <div class="form-group col-lg-5 col-md-12 col-sm-12 location">
+              <span class="icon flaticon-map-locator"></span>
+              <input type="text" name="field_name" placeholder="City or postcode">
+            </div> -->
+
+            
+            <!-- Form Group -->
+            <div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
+              <button type="submit" class="theme-btn btn-style-one">Find Jobs</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Job Search Form -->
+    </div>
+</section>
+
+
+<section class="ls-section">
+    <div class="auto-container">
+      <div class="filters-backdrop"></div>
+
+      <div class="row">
+        
+
+        <!-- Content Column -->
+        <div class="content-column col-lg-12">
+          <div class="ls-outer">
+            <!-- ls Switcher -->
+            <!-- <div class="ls-switcher">
+              <div class="showing-result show-filters">
+                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> jobs</div>
+              </div>
+              <div class="sort-by">
+                <select class="chosen-select">
+                  <option>Sort by (Defualt)</option>
+                  <option>Newest</option>
+                  <option>Oldest</option>
+                  <option>Random</option>
+                </select>
+
+                <select class="chosen-select">
+                  <option>9 Per Page</option>
+                  <option>18 Per Page</option>
+                  <option>All</option>
+                </select>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <!-- Job Block -->
+              {% for company in companies.items %}
+              <div class="job-block-four col-lg-4 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <!-- <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul> -->
+                  <span class="company-logo"><img src="{{ url_for('static', filename='employer/logo/' + company.logo) }}" alt=""></span>
+                  <span class="company-name">{{ company.tagline }}</span>
+                  <h4><a href="{{ url_for('employer.profile', company_id=company.id) }}">{{ company.name.capitalize() }}</a></h4>
+                  <div class="location"><span class="icon flaticon-map-locator"></span>{{ company.location }}</div>
+                  <p class="text">
+                    {{ company.description|truncate(75) }}
+                    <a href="{{ url_for('employer.profile', company_id=company.id) }}" class="t-prim"> <br>Learn More <i class="fa fa-angle-right"></i></a>
+                    </p>
+                </div>
+              </div>
+              {% endfor %}
+
+
+            </div>
+
+            <!-- Listing Show More -->
+            <!-- <div class="ls-show-more">
+              <p>Showing 36 of 497 Jobs</p>
+              <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
+              <button class="show-more">Show More</button>
+            </div> -->
+
+            {% if companies.total > companies.per_page %}
+            {% for page_num in companies.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if companies.page == page_num %}
+                        <a href="{{ url_for('employer.company_list', page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                    {% else %}
+                        <a href="{{ url_for('employer.company_list', page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+<!-- <section id=" " class="">
+    <div class="container-fluid bg-teal-lgrad text-light text-center py-3">
+        <h2 class="">Search Companies</h2>
+        <div class="d-flex py-3">
+            <div class="mx-auto text-light bg-secondary px-5 py-3">
+                <form class="m-0 p-0" method="post" action="{{ url_for('employer.company_search') }}">
+                    {{ form1.hidden_tag() }}
+                    <div class="d-sm-flex align-items-center">
+                        <div>
+                            <input type="text" name="name" placeholder="Name or Location" class="d-block my-2 p-1" required>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-sm btn-brand peach text-light px-3 d-block ms-sm-1"> <i class="fa fa-search"></i> Search </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- <section id="companies" class="bg-light py-5">
+    <div class="container">
+        <div class="section-header">
+            <h2 class=" ">{{ head }} </h2>
+        </div>
+        
+        <div class="row row-cols-xxl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-2">
+            {% for company in companies.items %}
+                <div class="col">
+                    <div class="bg-white border rad-3 d-flex p-3 h-100">
+                        <div>
+                            <a href="{{ url_for('employer.profile', company_id=company.id) }}" class="profile-img-ctn prof-sm">
+                                <img src="{{ url_for('static', filename='employer/logo/' + company.logo) }}" alt="">
+                            </a>
+                        </div>
+                        <div class="ms-3 ">
+                            <a href="{{ url_for('employer.profile', company_id=company.id) }}" class="m-0 h3 text-dark">{{ company.name.capitalize() }}</a>
+                            <p class="text-muted"><i class="fa fa-map-marker t-prim"></i> {{ company.location }}</p>
+                            <p>
+                                {{ company.description|truncate(75) }}
+                                <a href="{{ url_for('employer.profile', company_id=company.id) }}" class="t-prim">Learn More <i class="fa fa-angle-right"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if companies.total > companies.per_page %}
+            {% for page_num in companies.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if companies.page == page_num %}
+                        <a href="{{ url_for('employer.company_list', page=page_num) }}" class="btn btn-sm btn-primary my-3">{{ page_num }}</a>
+                    {% else %}
+                        <a href="{{ url_for('employer.company_list', page=page_num) }}" class="btn btn-sm btn-outline-primary my-3">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+    </div>
+</section> -->
+
+{% endblock %}
+{% block script %}{% endblock %}

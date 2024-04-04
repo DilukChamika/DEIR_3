@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+
+
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+      <div class="upper-title-box">
+        <h3>Edit Profile</h3>
+      </div>
+
+
+      <!-- Image removal confirmation modal -->
+      <div class="modal fade jobdelmodal" id="remove-pic" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content bg-c-white t-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Delete Image?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ url_for('applicant.delete_image', applicant_id=user.id) }}" method="post">
+                        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Ls widget -->
+          <div class="ls-widget">
+            <div class="tabs-box">
+              <div class="widget-title">
+                <h4>My Profile</h4>
+              </div>
+
+              <div class="widget-content">
+
+                <div class="uploading-outer">
+                    <div class="prof-update">
+                        <div class="d-flex">
+                            <div class="profile-img-ctn">
+                                <img src="{{ url_for('static', filename='applicant/image/' + user.image) }}" alt="" width="120px">
+                            </div>
+                            <div class="ms-2">
+                                <p class="m-0 text-bold p-0">{{ user.l_name }} {{ user.f_name }}</p>
+                                <!-- <p class="text-muted m-0"><small><i class="fa fa-map-marker t-prim"></i> </small></p> -->
+                                {% if user.image != 'user.png' %}
+                                    <button class="btn btn-sm btn-outline-secondary px-2 p-0" data-bs-toggle="modal" data-bs-target="#remove-pic" >Remove</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <form class="default-form" method="POST" enctype="multipart/form-data">
+                    {{form.hidden_tag()}}
+                  <div class="row">
+                    <!-- Input -->
+                    <div class="form-group col-lg-6 col-md-12">
+                      <label>{{form.f_name.label(class="form-control-label")}}</label>
+                        {% if form.f_name.errors %}
+                            {{form.f_name(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.f_name.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.f_name(class="form-control")}}
+                        {% endif %}
+                    </div>
+
+                    <!-- Input -->
+                    <div class="form-group col-lg-6 col-md-12">
+                      <label> {{form.l_name.label(class="form-control-label")}}</label>
+                        {% if form.l_name.errors %}
+                            {{form.l_name(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.l_name.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.l_name(class="form-control")}}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label>{{form.email.label(class="form-control-label")}}</label>
+                        {% if form.email.errors %}
+                            {{form.email(class="form-control is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.email(class="form-control")}}
+                        {% endif %}
+                      </div>
+
+                    <!-- Input -->
+                    <div class="form-group col-lg-6 col-md-12">
+                      <label>{{form.phone.label(class="form-control-label")}}</label>
+                            {% if form.phone.errors %}
+                                {{form.phone(class="form-control is-invalid")}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.phone.errors %}
+                                        <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{form.phone(class="form-control")}}
+                            {% endif %}
+                    </div>
+
+                    <!-- Input -->
+                    <div class="form-group form-file-group col-lg-6 col-md-12">
+                      <label>{{form.resume.label(class="form-label")}}</label>
+                            {{form.resume(class="form-control form-control-sm")}}
+                            {% if form.resume.errors %}
+                                {% for error in form.resume.errors %}
+                                    <span class="text-danger">{{error}}</span><br>
+                                {% endfor %}
+                            {% else %}
+                            {% endif %}
+                    </div>
+
+                    <!-- Input -->
+                    <div class="form-group form-file-group col-lg-6 col-md-12">
+                        <label>{{form.image.label(class="form-label")}}</label>
+                            {{form.image(class="form-control form-control-sm")}}
+                            {% if form.image.errors %}
+                                {% for error in form.image.errors %}
+                                    <span class="text-danger">{{error}}</span><br>
+                                {% endfor %}
+                            {% else %}
+                            {% endif %}
+                      </div>
+
+
+                    <!-- Input -->
+                    <div class="form-group col-lg-6 col-md-12">
+                        {{form.submit(class="theme-btn btn-style-one")}}
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+  
+         
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block script %}{% endblock %}
