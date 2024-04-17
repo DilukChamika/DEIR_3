@@ -1,0 +1,92 @@
+applicants->> routes.py
+
+# Applicant Account Settings
+@applicant.route("/applicant/settings", methods=['GET','POST'])
+@user_role_required('applicant')
+def settings():
+    user = current_user.applicants
+    form = Applicant_User_Update()
+
+    applicant = Applicant.query.filter(Applicant.id == user.id).first()
+    applicant_id = db.session.query(Applicant.user_id).filter(Applicant.id == user.id).scalar()
+    user_details = User.query.filter(User.id == applicant_id).first()
+
+
+    if form.validate_on_submit():
+        applicant.f_name = form.f_name.data
+        applicant.l_name = form.l_name.data
+        user_details.email = form.email.data.lower()
+        applicant.phone = form.phone.data 
+
+        if form.image.data:
+            new_file = save_file('applicant/image/', form.image.data)
+            if new_file:
+                if user.image != 'anony.png':
+                    old_file = f'applicant/image/{str(user.image)}'
+                    remove_file(old_file)
+                user.image = new_file
+
+        db.session.commit()
+        flash(f'Account Updated Successfully.', 'success')
+        return redirect(url_for('.settings'))
+
+    form.f_name.data = applicant.f_name 
+    form.l_name.data = applicant.l_name
+    form.email.data = user_details.email
+    form.phone.data = applicant.phone
+
+    return render_template("applicants/settings.html", title="DEIR: Diversity, Equity, Inclusion, Retention", form=form, user = user)
+
+
+
+
+
+
+
+
+
+
+
+employers ->>> routes.py
+
+
+# Company search
+@employer.route("/company/search", methods=['POST'])
+def company_search():
+    user= get_user()
+    form1 = Company_Search()
+    form = request.form
+    name_or_location = form['name']
+    search = "%{0}%".format(name_or_location)
+
+    page = request.args.get('page', 1, type=int)
+    companies = Employer.query.filter((Employer.name.like(search) | Employer.location.like(search))).order_by(Employer.name.desc()).paginate(page=page, per_page=15) 
+    
+    head = f'Search Results for "{name_or_location}": {companies.total}'
+    return render_template("employers/list.html", title="DEIR: Diversity, Equity, Inclusion, Retention", companies=companies, head=head, form1=form1, user=user)
+
+
+
+
+
+
+
+
+
+
+
+    Comment the code line num 100 @ templates->applicant->jobs.html
+    Comment the code line num 114 @ templates->applicant->shortlists.html
+
+
+
+
+
+
+add following to applicants->routes line no 615 
+
+else:
+            image = 'anony.png'
+            applicant = Applicant(f_name=form.f_name.data.strip().capitalize(), l_name=form.l_name.data.strip().capitalize(), gender=form.gender.data, phone=form.phone.data,job_categories=job_categories_str,resume=resume,image=image, user=user)
+            db.session.add(applicant)
+            db.session.commit()

@@ -66,7 +66,13 @@ def settings():
         user_details.email = form.email.data.lower()
         applicant.phone = form.phone.data 
 
-        
+        if form.image.data:
+            new_file = save_file('applicant/image/', form.image.data)
+            if new_file:
+                if user.image != 'anony.png':
+                    old_file = f'applicant/image/{str(user.image)}'
+                    remove_file(old_file)
+                user.image = new_file
 
         db.session.commit()
         flash(f'Account Updated Successfully.', 'success')
@@ -603,7 +609,8 @@ def applicant_signup():
             db.session.add(applicant)
             db.session.commit()
         else:
-            applicant = Applicant(f_name=form.f_name.data.strip().capitalize(), l_name=form.l_name.data.strip().capitalize(), gender=form.gender.data, phone=form.phone.data,job_categories=job_categories_str,resume=resume, user=user)
+            image = 'anony.png'
+            applicant = Applicant(f_name=form.f_name.data.strip().capitalize(), l_name=form.l_name.data.strip().capitalize(), gender=form.gender.data, phone=form.phone.data,job_categories=job_categories_str,resume=resume,image=image, user=user)
             db.session.add(applicant)
             db.session.commit()
 

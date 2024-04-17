@@ -1426,6 +1426,7 @@ def send_pwd_reset_email(email, reset_url, user_role, name):
 # Company search
 @employer.route("/company/search", methods=['POST'])
 def company_search():
+    user= get_user()
     form1 = Company_Search()
     form = request.form
     name_or_location = form['name']
@@ -1435,7 +1436,7 @@ def company_search():
     companies = Employer.query.filter((Employer.name.like(search) | Employer.location.like(search))).order_by(Employer.name.desc()).paginate(page=page, per_page=15) 
     
     head = f'Search Results for "{name_or_location}": {companies.total}'
-    return render_template("employers/list.html", title="DEIR: Diversity, Equity, Inclusion, Retention", companies=companies, head=head, form1=form1)
+    return render_template("employers/list.html", title="DEIR: Diversity, Equity, Inclusion, Retention", companies=companies, head=head, form1=form1, user=user)
 
 
 @employer.route("/employer/delete-profile", methods=['GET', 'POST'])
