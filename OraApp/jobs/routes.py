@@ -4,6 +4,7 @@ from OraApp.models import Job, jobs_applied, Employer,JobsInquired
 from flask import render_template, Blueprint, request, abort
 from OraApp.forms import Job_Search
 from flask_login import login_user, current_user
+from OraApp.utils import user_role_required
 
 jobs = Blueprint('jobs', __name__)
 
@@ -18,6 +19,7 @@ def get_user():
 
 # Job details
 @jobs.route("/jobs/<int:job_id>/details/")
+@user_role_required('applicant')
 def profile(job_id):
     user_id = current_user.id
     user = get_user()
